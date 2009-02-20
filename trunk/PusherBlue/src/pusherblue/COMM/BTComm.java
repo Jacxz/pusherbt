@@ -1,14 +1,131 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-package pusherblue.COMM;
-
 /**
  *
  * @author Niklas
  */
-public class BTComm {
+package pusherblue.COMM;
 
+
+import java.util.*;
+//Bluetooth imports
+import javax.bluetooth.*;
+
+
+public class BTComm implements Runnable, DiscoveryListener {
+
+    //Local device
+    private LocalDevice device;
+
+    private DiscoveryAgent agent;
+  
+    private Object lock = new Object();
+    // list of RemoteDevice discovered
+    private static Vector devices = new Vector();
+    // list of ServiceRecord discovered for one RemoteDevice
+    private static Vector services = new Vector();
+    
+    private Thread processorThread;
+
+    public BTComm(){
+        processorThread = new Thread(this);
+        processorThread.start();
+    }
+    public void run() {
+        
+           doDiscoverDevice();
+        
+    }
+//****************************************************************************
+//Perform Bluetooth device discovery.
+//****************************************************************************
+    public void doDiscoverDevice() {
+        try {
+            device = LocalDevice.getLocalDevice();
+            agent = device.getDiscoveryAgent();
+            //BTComm btcomm = new BTComm();
+            System.out.println("Local: " + device.getBluetoothAddress() +
+                    " (" + device.getFriendlyName() + ")");
+
+            System.out.println("Starting device inquiry...");
+            agent.startInquiry(DiscoveryAgent.GIAC, this);
+            try {
+                synchronized(lock){
+				lock.wait(); // until devices are found
+                }
+            } catch (InterruptedException e) {
+                System.err.println("Unexpected interruption: " + e);
+            }
+        } catch (BluetoothStateException exp) {}
+        
+    }
+
+//****************************************************************************
+//Perform service discovery on a remote device.
+//****************************************************************************
+    public void doDiscoverService(RemoteDevice remote) {
+
+    }
+
+//****************************************************************************
+//This function is invoked for each RemoteDevice discovered by JABWT
+//****************************************************************************
+    public void deviceDiscovered(RemoteDevice remoteDevice, DeviceClass deviceClass){
+    devices.addElement(remoteDevice);
+    }
+
+//****************************************************************************
+//This function is invoked when the device discovery is completed
+//****************************************************************************
+    public void inquiryCompleted(int complete){
+        synchronized(lock){
+			lock.notify();
+		}
+        if(devices.size() == 0){
+          //What to do when no device found
+        }
+        else{
+          //What to do with the devices found
+        }
+    }
+
+//****************************************************************************
+//This function is invoked when services are found on a RemoteDevice
+//****************************************************************************
+    public void servicesDiscovered(int transId, ServiceRecord[] records){
+        if(records.length == 0){
+
+        }
+        for(int i = 0; i < records.length; i++){
+            ServiceRecord record = records[i];
+            services.addElement(record);
+        }
+    }
+
+  //****************************************************************************
+  //This function is invoked when service discovery is completed on a RemoteDevice
+  //****************************************************************************
+    public void serviceSearchCompleted(int transId, int complete){
+        if(complete == 3){ //SERVICE_SEARCH_ERROR
+            System.out.println("\nSERVICE_SEARCH_ERROR\n");
+        }
+        if(complete == 1){ //SERVICE_SEARCH_COMPLETED
+            System.out.println("\nSERVICE_SEARCH_COMPLETED\n");
+        }
+        if(complete == 2){ //SERVICE_SEARCH_TERMINATED
+            System.out.println("\n SERVICE_SEARCH_TERMINATED\n");
+        }
+        if(complete == 4){ //SERVICE_SEARCH_NO_RECORDS
+            System.out.println("\n SERVICE_SEARCH_NO_RECORDS\n");
+        }
+        if(complete == 6){ //SERVICE_SEARCH_DEVICE_NOT_REACHABLE
+            System.out.println("\n SERVICE_SEARCH_DEVICE_NOT_REACHABLE\n");
+        }
+    }
+
+    public static Vector getDevices() {
+        return devices;
+    }
+
+    public static Vector getServices() {
+        return services;
+    }
 }
