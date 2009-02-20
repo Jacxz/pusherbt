@@ -154,6 +154,9 @@ public class HelloMIDlet extends MIDlet implements CommandListener {
      */
     public Display getDisplay () {
         return Display.getDisplay(this);
+
+
+        //majs...
     }
 
     /**
