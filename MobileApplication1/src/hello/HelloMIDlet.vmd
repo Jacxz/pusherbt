@@ -33,8 +33,8 @@
             <Component componentID="10" typeID="C#DisplayablesCategory">
                 <Component componentID="14" typeID="Cjavax.microedition.lcdui.Form">
                     <Property name="instanceName" typeID="Pjava.lang.String" value="Vform"/>
-                    <Property name="title" typeID="Pjava.lang.String" value="VWelcome"/>
                     <Property name="commands" typeID="1C#CommandEventSource" value="A1:3_R19"/>
+                    <Property name="title" typeID="Pjava.lang.String" value="VWelcome"/>
                     <Property name="commandListener" typeID="C#CommandListener" value="R7"/>
                     <Property name="items" typeID="1Cjavax.microedition.lcdui.Item" value="A1:3_R16"/>
                     <Component componentID="16" typeID="Cjavax.microedition.lcdui.StringItem">
@@ -55,10 +55,11 @@
                 </Component>
             </Component>
             <Component componentID="13" typeID="C#ResourcesCategory"/>
+            <Component componentID="21" typeID="C#DatabindingCategory"/>
         </Component>
     </Document>
     <FlowScene version="1">
-        <Node componentID="2" descriptorID="componentNode2" x="24" y="26"/>
         <Node componentID="14" descriptorID="componentNode14" x="278" y="162"/>
+        <Node componentID="2" descriptorID="componentNode2" x="24" y="26"/>
     </FlowScene>
 </VisualDesign>

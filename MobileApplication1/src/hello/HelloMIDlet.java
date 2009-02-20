@@ -13,7 +13,7 @@ import javax.microedition.lcdui.*;
  */
 public class HelloMIDlet extends MIDlet implements CommandListener {
 
-    private boolean midletPaused = false;
+    private boolean midletPaused = true;
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Fields ">//GEN-BEGIN:|fields|0|
     private Command exitCommand;
