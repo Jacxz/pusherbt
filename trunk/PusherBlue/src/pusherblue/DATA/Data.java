@@ -9,6 +9,8 @@ package pusherblue.DATA;
  *
  * @author Niklas
  */
-public interface Data {
+public abstract class Data {
 
+    private String to;
+    private String from;
 }

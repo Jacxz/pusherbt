@@ -4,6 +4,7 @@
  */
 package pusherblue.CORE;
 
+import java.io.IOException;
 import java.util.Vector;
 import javax.bluetooth.RemoteDevice;
 import pusherblue.COMM.BTComm;
@@ -19,13 +20,14 @@ public class Core {
     private Data data;
     private BTComm bCom;
     private Vector userList;
-
+    private User mySelf;
     /**
      * Constructor for Core
      */
     public Core() {
         userList = new Vector();
         bCom = new BTComm();
+
 
     }
 
@@ -57,10 +59,17 @@ public class Core {
 
         Vector devices = new Vector();
         devices = bCom.getDevices();
+
         for(int i = 0; i< devices.size();i++){
             RemoteDevice device;
             device = (RemoteDevice) devices.elementAt(i);
-            User user = new User(device.getBluetoothAddress());
+            User user = null;
+            try {
+                user = new User(device.getFriendlyName(false), device.getBluetoothAddress());
+            } catch (IOException ex) {
+                System.out.println("Problem getting friendlyname...");
+                ex.printStackTrace();
+            }
             userList.addElement(user);
         }
     }
@@ -74,7 +83,7 @@ public class Core {
         String names[] = null;
         for(int i = 0; i< userList.size();i++){
             User user = (User) userList.elementAt(i);
-            names[i] = user.getAddress();
+            names[i] = user.getAddress(); //name
         }
         return names;
     }

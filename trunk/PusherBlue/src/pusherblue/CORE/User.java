@@ -11,10 +11,16 @@ package pusherblue.CORE;
 public class User {
 
     private String address;
+    private String name;
 
-    public User(String address) {
+    public User(String name, String address) {
         this.address = address;
+        this.name = name;
 
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getAddress(){
