@@ -10,6 +10,9 @@ import javax.microedition.lcdui.*;
 import pusherblue.COMM.BTComm;
 import java.util.*;
 import javax.bluetooth.RemoteDevice;
+import org.netbeans.microedition.lcdui.SimpleTableModel;
+import org.netbeans.microedition.lcdui.SplashScreen;
+import org.netbeans.microedition.lcdui.TableItem;
 
 /**
  * @author Niklas
@@ -20,8 +23,9 @@ public class GUI extends MIDlet implements CommandListener {
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Fields ">//GEN-BEGIN:|fields|0|
     private Command exitCommand;
-    private Form form;
-    private StringItem stringItem;
+    private SplashScreen splashScreen;
+    private List list;
+    private Font listFont;
     //</editor-fold>//GEN-END:|fields|0|
 
     /**
@@ -51,6 +55,7 @@ public class GUI extends MIDlet implements CommandListener {
      */
     private void initialize() {//GEN-END:|0-initialize|0|0-preInitialize
         // write pre-initialize user code here
+        BTCommTestMethod();
 //GEN-LINE:|0-initialize|1|0-postInitialize
         // write post-initialize user code here
     }//GEN-BEGIN:|0-initialize|2|
@@ -62,7 +67,7 @@ public class GUI extends MIDlet implements CommandListener {
      */
     public void startMIDlet() {//GEN-END:|3-startMIDlet|0|3-preAction
         // write pre-action user code here
-        switchDisplayable(null, getForm());//GEN-LINE:|3-startMIDlet|1|3-postAction
+        switchDisplayable(null, getSplashScreen());//GEN-LINE:|3-startMIDlet|1|3-postAction
         // write post-action user code here
     }//GEN-BEGIN:|3-startMIDlet|2|
     //</editor-fold>//GEN-END:|3-startMIDlet|2|
@@ -104,16 +109,26 @@ public class GUI extends MIDlet implements CommandListener {
      */
     public void commandAction(Command command, Displayable displayable) {//GEN-END:|7-commandAction|0|7-preCommandAction
         // write pre-action user code here
-        if (displayable == form) {//GEN-BEGIN:|7-commandAction|1|19-preAction
-            if (command == exitCommand) {//GEN-END:|7-commandAction|1|19-preAction
+        if (displayable == list) {//GEN-BEGIN:|7-commandAction|1|31-preAction
+            if (command == List.SELECT_COMMAND) {//GEN-END:|7-commandAction|1|31-preAction
                 // write pre-action user code here
-                exitMIDlet();//GEN-LINE:|7-commandAction|2|19-postAction
+                listAction();//GEN-LINE:|7-commandAction|2|31-postAction
                 // write post-action user code here
-            }//GEN-BEGIN:|7-commandAction|3|7-postCommandAction
-        }//GEN-END:|7-commandAction|3|7-postCommandAction
+            } else if (command == exitCommand) {//GEN-LINE:|7-commandAction|3|42-preAction
+                // write pre-action user code here
+                exitMIDlet();//GEN-LINE:|7-commandAction|4|42-postAction
+                // write post-action user code here
+            }//GEN-BEGIN:|7-commandAction|5|24-preAction
+        } else if (displayable == splashScreen) {
+            if (command == SplashScreen.DISMISS_COMMAND) {//GEN-END:|7-commandAction|5|24-preAction
+                // write pre-action user code here
+                switchDisplayable(null, getList());//GEN-LINE:|7-commandAction|6|24-postAction
+                // write post-action user code here
+            }//GEN-BEGIN:|7-commandAction|7|7-postCommandAction
+        }//GEN-END:|7-commandAction|7|7-postCommandAction
         // write post-action user code here
-    }//GEN-BEGIN:|7-commandAction|4|
-    //</editor-fold>//GEN-END:|7-commandAction|4|
+    }//GEN-BEGIN:|7-commandAction|8|24-postAction
+    //</editor-fold>//GEN-END:|7-commandAction|8|24-postAction
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Getter: exitCommand ">//GEN-BEGIN:|18-getter|0|18-preInit
     /**
@@ -130,37 +145,78 @@ public class GUI extends MIDlet implements CommandListener {
     }
     //</editor-fold>//GEN-END:|18-getter|2|
 
-    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: form ">//GEN-BEGIN:|14-getter|0|14-preInit
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: splashScreen ">//GEN-BEGIN:|22-getter|0|22-preInit
     /**
-     * Returns an initiliazed instance of form component.
+     * Returns an initiliazed instance of splashScreen component.
      * @return the initialized component instance
      */
-    public Form getForm() {
-        if (form == null) {//GEN-END:|14-getter|0|14-preInit
+    public SplashScreen getSplashScreen() {
+        if (splashScreen == null) {//GEN-END:|22-getter|0|22-preInit
             // write pre-init user code here
-            form = new Form("Welcome", new Item[] { getStringItem() });//GEN-BEGIN:|14-getter|1|14-postInit
-            form.addCommand(getExitCommand());
-            form.setCommandListener(this);//GEN-END:|14-getter|1|14-postInit
+            splashScreen = new SplashScreen(getDisplay());//GEN-BEGIN:|22-getter|1|22-postInit
+            splashScreen.setTitle("Pusher Blue Splash");
+            splashScreen.setCommandListener(this);
+            splashScreen.setFullScreenMode(true);
+            splashScreen.setText("YoYo!");
+            splashScreen.setTimeout(1000);//GEN-END:|22-getter|1|22-postInit
             // write post-init user code here
-        }//GEN-BEGIN:|14-getter|2|
-        return form;
+        }//GEN-BEGIN:|22-getter|2|
+        return splashScreen;
     }
-    //</editor-fold>//GEN-END:|14-getter|2|
+    //</editor-fold>//GEN-END:|22-getter|2|
 
-    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: stringItem ">//GEN-BEGIN:|16-getter|0|16-preInit
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: listFont ">//GEN-BEGIN:|27-getter|0|27-preInit
     /**
-     * Returns an initiliazed instance of stringItem component.
+     * Returns an initiliazed instance of listFont component.
      * @return the initialized component instance
      */
-    public StringItem getStringItem() {
-        if (stringItem == null) {//GEN-END:|16-getter|0|16-preInit
+    public Font getListFont() {
+        if (listFont == null) {//GEN-END:|27-getter|0|27-preInit
             // write pre-init user code here
-            stringItem = new StringItem("Hello", "Hello, World!");//GEN-LINE:|16-getter|1|16-postInit
+            listFont = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_SMALL);//GEN-LINE:|27-getter|1|27-postInit
             // write post-init user code here
-        }//GEN-BEGIN:|16-getter|2|
-        return stringItem;
+        }//GEN-BEGIN:|27-getter|2|
+        return listFont;
     }
-    //</editor-fold>//GEN-END:|16-getter|2|
+    //</editor-fold>//GEN-END:|27-getter|2|
+
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: list ">//GEN-BEGIN:|29-getter|0|29-preInit
+    /**
+     * Returns an initiliazed instance of list component.
+     * @return the initialized component instance
+     */
+    public List getList() {
+        if (list == null) {//GEN-END:|29-getter|0|29-preInit
+            // write pre-init user code here
+            list = new List("list", Choice.IMPLICIT);//GEN-BEGIN:|29-getter|1|29-postInit
+            list.append("Jacxz", null);
+            list.addCommand(getExitCommand());
+            list.setCommandListener(this);
+            list.setSelectedFlags(new boolean[] { false });
+            list.setFont(0, getListFont());//GEN-END:|29-getter|1|29-postInit
+            // write post-init user code here
+        }//GEN-BEGIN:|29-getter|2|
+        return list;
+    }
+    //</editor-fold>//GEN-END:|29-getter|2|
+
+    //<editor-fold defaultstate="collapsed" desc=" Generated Method: listAction ">//GEN-BEGIN:|29-action|0|29-preAction
+    /**
+     * Performs an action assigned to the selected list element in the list component.
+     */
+    public void listAction() {//GEN-END:|29-action|0|29-preAction
+        // enter pre-action user code here
+        String __selectedString = getList().getString(getList().getSelectedIndex());//GEN-BEGIN:|29-action|1|41-preAction
+        if (__selectedString != null) {
+            if (__selectedString.equals("Jacxz")) {//GEN-END:|29-action|1|41-preAction
+                // write pre-action user code here
+//GEN-LINE:|29-action|2|41-postAction
+                // write post-action user code here
+            }//GEN-BEGIN:|29-action|3|29-postAction
+        }//GEN-END:|29-action|3|29-postAction
+        // enter post-action user code here
+    }//GEN-BEGIN:|29-action|4|
+    //</editor-fold>//GEN-END:|29-action|4|
 
     /**
      * Returns a display instance.
@@ -189,7 +245,6 @@ public class GUI extends MIDlet implements CommandListener {
         } else {
             initialize ();
             startMIDlet ();
-            BTCommTestMethod();
         }
         midletPaused = false;
     }
@@ -222,5 +277,4 @@ public class GUI extends MIDlet implements CommandListener {
      */
     public void destroyApp(boolean unconditional) {
     }
-
 }
