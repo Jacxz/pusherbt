@@ -10,9 +10,7 @@ import javax.microedition.lcdui.*;
 import pusherblue.COMM.BTComm;
 import java.util.*;
 import javax.bluetooth.RemoteDevice;
-import org.netbeans.microedition.lcdui.SimpleTableModel;
 import org.netbeans.microedition.lcdui.SplashScreen;
-import org.netbeans.microedition.lcdui.TableItem;
 
 /**
  * @author Niklas
@@ -23,6 +21,8 @@ public class GUI extends MIDlet implements CommandListener {
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Fields ">//GEN-BEGIN:|fields|0|
     private Command exitCommand;
+    private Command updateCommand;
+    private Command sendPMCommand;
     private SplashScreen splashScreen;
     private List list;
     private Font listFont;
@@ -43,7 +43,6 @@ public class GUI extends MIDlet implements CommandListener {
         for(int i = 0 ; i < vecDevs.size() ; i++){
             System.out.println((i+1) + ". " + ((RemoteDevice)vecDevs.elementAt(i)).getBluetoothAddress());
         }
-        
     }
     //<editor-fold defaultstate="collapsed" desc=" Generated Methods ">//GEN-BEGIN:|methods|0|
     //</editor-fold>//GEN-END:|methods|0|
@@ -118,17 +117,25 @@ public class GUI extends MIDlet implements CommandListener {
                 // write pre-action user code here
                 exitMIDlet();//GEN-LINE:|7-commandAction|4|42-postAction
                 // write post-action user code here
-            }//GEN-BEGIN:|7-commandAction|5|24-preAction
-        } else if (displayable == splashScreen) {
-            if (command == SplashScreen.DISMISS_COMMAND) {//GEN-END:|7-commandAction|5|24-preAction
+            } else if (command == sendPMCommand) {//GEN-LINE:|7-commandAction|5|53-preAction
                 // write pre-action user code here
-                switchDisplayable(null, getList());//GEN-LINE:|7-commandAction|6|24-postAction
+//GEN-LINE:|7-commandAction|6|53-postAction
                 // write post-action user code here
-            }//GEN-BEGIN:|7-commandAction|7|7-postCommandAction
-        }//GEN-END:|7-commandAction|7|7-postCommandAction
+            } else if (command == updateCommand) {//GEN-LINE:|7-commandAction|7|51-preAction
+                // write pre-action user code here
+//GEN-LINE:|7-commandAction|8|51-postAction
+                // write post-action user code here
+            }//GEN-BEGIN:|7-commandAction|9|24-preAction
+        } else if (displayable == splashScreen) {
+            if (command == SplashScreen.DISMISS_COMMAND) {//GEN-END:|7-commandAction|9|24-preAction
+                // write pre-action user code here
+                switchDisplayable(null, getList());//GEN-LINE:|7-commandAction|10|24-postAction
+                // write post-action user code here
+            }//GEN-BEGIN:|7-commandAction|11|7-postCommandAction
+        }//GEN-END:|7-commandAction|11|7-postCommandAction
         // write post-action user code here
-    }//GEN-BEGIN:|7-commandAction|8|24-postAction
-    //</editor-fold>//GEN-END:|7-commandAction|8|24-postAction
+    }//GEN-BEGIN:|7-commandAction|12|
+    //</editor-fold>//GEN-END:|7-commandAction|12|
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Getter: exitCommand ">//GEN-BEGIN:|18-getter|0|18-preInit
     /**
@@ -191,6 +198,8 @@ public class GUI extends MIDlet implements CommandListener {
             list = new List("list", Choice.IMPLICIT);//GEN-BEGIN:|29-getter|1|29-postInit
             list.append("Jacxz", null);
             list.addCommand(getExitCommand());
+            list.addCommand(getUpdateCommand());
+            list.addCommand(getSendPMCommand());
             list.setCommandListener(this);
             list.setSelectedFlags(new boolean[] { false });
             list.setFont(0, getListFont());//GEN-END:|29-getter|1|29-postInit
@@ -217,6 +226,36 @@ public class GUI extends MIDlet implements CommandListener {
         // enter post-action user code here
     }//GEN-BEGIN:|29-action|4|
     //</editor-fold>//GEN-END:|29-action|4|
+
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: updateCommand ">//GEN-BEGIN:|50-getter|0|50-preInit
+    /**
+     * Returns an initiliazed instance of updateCommand component.
+     * @return the initialized component instance
+     */
+    public Command getUpdateCommand() {
+        if (updateCommand == null) {//GEN-END:|50-getter|0|50-preInit
+            // write pre-init user code here
+            updateCommand = new Command("Update", Command.SCREEN, 0);//GEN-LINE:|50-getter|1|50-postInit
+            // write post-init user code here
+        }//GEN-BEGIN:|50-getter|2|
+        return updateCommand;
+    }
+    //</editor-fold>//GEN-END:|50-getter|2|
+
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: sendPMCommand ">//GEN-BEGIN:|52-getter|0|52-preInit
+    /**
+     * Returns an initiliazed instance of sendPMCommand component.
+     * @return the initialized component instance
+     */
+    public Command getSendPMCommand() {
+        if (sendPMCommand == null) {//GEN-END:|52-getter|0|52-preInit
+            // write pre-init user code here
+            sendPMCommand = new Command("Send Pm", Command.ITEM, 0);//GEN-LINE:|52-getter|1|52-postInit
+            // write post-init user code here
+        }//GEN-BEGIN:|52-getter|2|
+        return sendPMCommand;
+    }
+    //</editor-fold>//GEN-END:|52-getter|2|
 
     /**
      * Returns a display instance.
