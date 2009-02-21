@@ -25,6 +25,8 @@ public class GUI extends MIDlet implements CommandListener {
     private Command sendPMCommand;
     private SplashScreen splashScreen;
     private List list;
+    private Form form;
+    private StringItem stringItem;
     private Font listFont;
     //</editor-fold>//GEN-END:|fields|0|
 
@@ -165,7 +167,7 @@ public class GUI extends MIDlet implements CommandListener {
             splashScreen.setCommandListener(this);
             splashScreen.setFullScreenMode(true);
             splashScreen.setText("YoYo!");
-            splashScreen.setTimeout(1000);//GEN-END:|22-getter|1|22-postInit
+            splashScreen.setTimeout(2000);//GEN-END:|22-getter|1|22-postInit
             // write post-init user code here
         }//GEN-BEGIN:|22-getter|2|
         return splashScreen;
@@ -256,6 +258,36 @@ public class GUI extends MIDlet implements CommandListener {
         return sendPMCommand;
     }
     //</editor-fold>//GEN-END:|52-getter|2|
+
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: form ">//GEN-BEGIN:|54-getter|0|54-preInit
+    /**
+     * Returns an initiliazed instance of form component.
+     * @return the initialized component instance
+     */
+    public Form getForm() {
+        if (form == null) {//GEN-END:|54-getter|0|54-preInit
+            // write pre-init user code here
+            form = new Form("form", new Item[] { getStringItem() });//GEN-LINE:|54-getter|1|54-postInit
+            // write post-init user code here
+        }//GEN-BEGIN:|54-getter|2|
+        return form;
+    }
+    //</editor-fold>//GEN-END:|54-getter|2|
+
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: stringItem ">//GEN-BEGIN:|55-getter|0|55-preInit
+    /**
+     * Returns an initiliazed instance of stringItem component.
+     * @return the initialized component instance
+     */
+    public StringItem getStringItem() {
+        if (stringItem == null) {//GEN-END:|55-getter|0|55-preInit
+            // write pre-init user code here
+            stringItem = new StringItem("stringItem", null);//GEN-LINE:|55-getter|1|55-postInit
+            // write post-init user code here
+        }//GEN-BEGIN:|55-getter|2|
+        return stringItem;
+    }
+    //</editor-fold>//GEN-END:|55-getter|2|
 
     /**
      * Returns a display instance.
