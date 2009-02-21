@@ -4,11 +4,22 @@
  */
 
 package pusherblue.CORE;
-
 /**
  *
- * @author Niklas
+ * @author Olle & Henrik
  */
 public class User {
+
+    private String address;
+
+    public User(String address) {
+        this.address = address;
+
+    }
+
+    public String getAddress(){
+
+        return address;
+    }
 
 }
