@@ -21,14 +21,25 @@ public class Core {
     private BTComm bCom;
     private Vector userList;
     private User mySelf;
+    private Core instance;
+
     /**
      * Constructor for Core
      */
-    public Core() {
+    private Core() {
+        instance = new Core();
         userList = new Vector();
         bCom = new BTComm();
-
-
+    }
+    /**
+     * Singleton pattern to make sure there is only one Core object
+     * @return Core object
+     */
+    public Core getInstance() {
+        if (instance == null) {
+            instance = new Core();
+        }
+        return instance;
     }
 
     /**
@@ -60,7 +71,7 @@ public class Core {
         Vector devices = new Vector();
         devices = bCom.getDevices();
 
-        for(int i = 0; i< devices.size();i++){
+        for (int i = 0; i < devices.size(); i++) {
             RemoteDevice device;
             device = (RemoteDevice) devices.elementAt(i);
             User user = null;
@@ -75,15 +86,15 @@ public class Core {
     }
 
     /**
-     * GUI uses this method to get the user names (addresses)
+     * GUI uses this method to get the user names 
      * @return Array of user names
      */
-    public String[] listUsers(){
+    public String[] listUsers() {
 
         String names[] = null;
-        for(int i = 0; i< userList.size();i++){
+        for (int i = 0; i < userList.size(); i++) {
             User user = (User) userList.elementAt(i);
-            names[i] = user.getAddress(); //name
+            names[i] = user.getName(); 
         }
         return names;
     }
