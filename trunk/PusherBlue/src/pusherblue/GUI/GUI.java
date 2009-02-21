@@ -28,7 +28,9 @@ public class GUI extends MIDlet implements CommandListener {
      * The GUI constructor.
      */
     public GUI() {
+
     }
+    
     private void BTCommTestMethod(){
         BTComm bt = new BTComm(); //
         Vector vecDevs = new Vector();
@@ -187,9 +189,24 @@ public class GUI extends MIDlet implements CommandListener {
         } else {
             initialize ();
             startMIDlet ();
+            BTCommTestMethod();
         }
         midletPaused = false;
-        BTCommTestMethod();
+    }
+
+    /**
+     * recievePM
+     * asks user to display PM or not.
+     */
+    public void recievePM(){
+
+    }
+    
+    /**
+     * Called to display PM.
+     */
+    private void displayPM(){
+
     }
 
     /**
