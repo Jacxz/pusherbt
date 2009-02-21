@@ -66,7 +66,7 @@
                     <Property name="title" typeID="Pjava.lang.String" value="VPusher Blue Splash"/>
                     <Property name="commandListener" typeID="C#CommandListener" value="R7"/>
                     <Property name="isFullScreen" typeID="Pboolean" value="Vtrue"/>
-                    <Property name="text" typeID="Pjava.lang.String" value="VYoYo!"/>
+                    <Property name="image" typeID="Cjavax.microedition.lcdui.Image" value="R56"/>
                     <Property name="timeout" typeID="Pint" value="V2000"/>
                     <Component componentID="24" typeID="C#SplashScreenDismissCommandEventSource">
                         <Property name="eventHandler" typeID="C#EventHandler" value="R40"/>
@@ -135,14 +135,18 @@
                     <Property name="bold" typeID="Pint" value="V8"/>
                     <Property name="style" typeID="Pint" value="V1"/>
                 </Component>
+                <Component componentID="56" typeID="Cjavax.microedition.lcdui.Image">
+                    <Property name="instanceName" typeID="Pjava.lang.String" value="Vsplash"/>
+                    <Property name="resourcePath" typeID="Pjava.lang.String" value="V/splash.png"/>
+                </Component>
             </Component>
             <Component componentID="21" typeID="C#DatabindingCategory"/>
         </Component>
     </Document>
     <FlowScene version="1">
         <Node componentID="54" descriptorID="componentNode54" x="320" y="348"/>
-        <Node componentID="29" descriptorID="componentNode29" x="40" y="224"/>
         <Node componentID="22" descriptorID="componentNode22" x="226" y="32"/>
+        <Node componentID="29" descriptorID="componentNode29" x="40" y="224"/>
         <Node componentID="2" descriptorID="componentNode2" x="471" y="156"/>
     </FlowScene>
 </VisualDesign>
