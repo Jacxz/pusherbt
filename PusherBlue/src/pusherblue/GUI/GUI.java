@@ -30,6 +30,7 @@ public class GUI extends MIDlet implements CommandListener {
     private Form form;
     private StringItem stringItem;
     private Font listFont;
+    private Image splash;
     //</editor-fold>//GEN-END:|fields|0|
 
     /**
@@ -168,7 +169,7 @@ public class GUI extends MIDlet implements CommandListener {
             splashScreen.setTitle("Pusher Blue Splash");
             splashScreen.setCommandListener(this);
             splashScreen.setFullScreenMode(true);
-            splashScreen.setText("YoYo!");
+            splashScreen.setImage(getSplash());
             splashScreen.setTimeout(2000);//GEN-END:|22-getter|1|22-postInit
             // write post-init user code here
         }//GEN-BEGIN:|22-getter|2|
@@ -290,6 +291,25 @@ public class GUI extends MIDlet implements CommandListener {
         return stringItem;
     }
     //</editor-fold>//GEN-END:|55-getter|2|
+
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: splash ">//GEN-BEGIN:|56-getter|0|56-preInit
+    /**
+     * Returns an initiliazed instance of splash component.
+     * @return the initialized component instance
+     */
+    public Image getSplash() {
+        if (splash == null) {//GEN-END:|56-getter|0|56-preInit
+            // write pre-init user code here
+            try {//GEN-BEGIN:|56-getter|1|56-@java.io.IOException
+                splash = Image.createImage("/splash.png");
+            } catch (java.io.IOException e) {//GEN-END:|56-getter|1|56-@java.io.IOException
+                e.printStackTrace();
+            }//GEN-LINE:|56-getter|2|56-postInit
+            // write post-init user code here
+        }//GEN-BEGIN:|56-getter|3|
+        return splash;
+    }
+    //</editor-fold>//GEN-END:|56-getter|3|
 
     /**
      * Returns a display instance.
