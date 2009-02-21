@@ -33,11 +33,11 @@ public class GUI extends MIDlet implements CommandListener {
     
     private void BTCommTestMethod(){
         BTComm bt = new BTComm(); //
-        Vector vecDevs = new Vector();
-        vecDevs = BTComm.getDevices();
-        
-        for(int i = 0 ; i < vecDevs.size() ; i ++){
-            vecDevs.elementAt(i).toString();
+        Vector vecDevs;
+        vecDevs = bt.getDevices();
+        System.out.println("GUI, antal enheter i vectorn: "+vecDevs.size());
+        for(int i = 0 ; i < vecDevs.size() ; i++){
+            System.out.println((i+1) + ". " + ((RemoteDevice)vecDevs.elementAt(i)).getBluetoothAddress());
         }
         
     }

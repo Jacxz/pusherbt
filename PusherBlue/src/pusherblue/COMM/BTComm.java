@@ -5,6 +5,7 @@
 package pusherblue.COMM;
 
 
+import java.io.IOException;
 import java.util.*;
 //Bluetooth imports
 import javax.bluetooth.*;
@@ -28,6 +29,7 @@ public class BTComm implements Runnable, DiscoveryListener {
     public BTComm(){
         processorThread = new Thread(this);
         processorThread.start();
+        System.out.println("TRÅD STARTAD");
     }
     public void run() {
         
@@ -54,7 +56,29 @@ public class BTComm implements Runnable, DiscoveryListener {
             } catch (InterruptedException e) {
                 System.err.println("Unexpected interruption: " + e);
             }
-        } catch (BluetoothStateException exp) {}
+            System.out.println("Device Inquiry Completed. ");
+            System.out.println("Antal enheter i listan: " + devices.size());
+            //print all devices in vecDevices
+            /**int deviceCount=devices.size();
+            if(deviceCount <= 0){
+                System.out.println("No Devices Found .");
+            }
+            else{
+                //print bluetooth device addresses and names in the format [ No. address (name) ]
+                System.out.println("Bluetooth Devices: ");
+                for (int i = 0; i <deviceCount; i++) {
+                    RemoteDevice remoteDevice=(RemoteDevice)devices.elementAt(i);
+                    try {
+                        System.out.println((i + 1) + ". " + remoteDevice.getBluetoothAddress() + " (" + remoteDevice.getFriendlyName(true) + ")");
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+            */
+        } catch (BluetoothStateException exp) {
+            System.err.println("Unexpected interruption: " + exp);
+        }
         
     }
 
@@ -69,7 +93,8 @@ public class BTComm implements Runnable, DiscoveryListener {
 //This function is invoked for each RemoteDevice discovered by JABWT
 //****************************************************************************
     public void deviceDiscovered(RemoteDevice remoteDevice, DeviceClass deviceClass){
-    devices.addElement(remoteDevice);
+        if(!devices.contains(remoteDevice))
+            devices.addElement(remoteDevice);
     }
 
 //****************************************************************************
@@ -83,7 +108,7 @@ public class BTComm implements Runnable, DiscoveryListener {
           //What to do when no device found
         }
         else{
-          //What to do with the devices found
+          System.out.println("Sökning klar, finns devices i listan...");
         }
     }
 
@@ -121,11 +146,11 @@ public class BTComm implements Runnable, DiscoveryListener {
         }
     }
 
-    public static Vector getDevices() {
+    public Vector getDevices() {
         return devices;
     }
 
-    public static Vector getServices() {
+    public Vector getServices() {
         return services;
     }
 }
