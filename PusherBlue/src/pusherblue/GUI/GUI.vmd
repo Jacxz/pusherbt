@@ -41,6 +41,23 @@
                     <Property name="priority" typeID="Pint" value="V0"/>
                     <Property name="ordinary" typeID="Pboolean" value="Vfalse"/>
                 </Component>
+                <Component componentID="46" typeID="C#SVGMenuSelectCommand">
+                    <Property name="instanceName" typeID="Pjava.lang.String" value="VasvgMenuSelectCommand"/>
+                    <Property name="label" typeID="Pjava.lang.String" value="VSelect"/>
+                    <Property name="type" typeID="Pint" value="V8"/>
+                    <Property name="priority" typeID="Pint" value="V0"/>
+                    <Property name="ordinary" typeID="Pboolean" value="Vfalse"/>
+                </Component>
+                <Component componentID="50" typeID="Cjavax.microedition.lcdui.Command">
+                    <Property name="instanceName" typeID="Pjava.lang.String" value="VupdateCommand"/>
+                    <Property name="label" typeID="Pjava.lang.String" value="VUpdate"/>
+                    <Property name="type" typeID="Pint" value="V1"/>
+                </Component>
+                <Component componentID="52" typeID="Cjavax.microedition.lcdui.Command">
+                    <Property name="instanceName" typeID="Pjava.lang.String" value="VsendPMCommand"/>
+                    <Property name="label" typeID="Pjava.lang.String" value="VSend Pm"/>
+                    <Property name="type" typeID="Pint" value="V8"/>
+                </Component>
             </Component>
             <Component componentID="10" typeID="C#DisplayablesCategory">
                 <Component componentID="22" typeID="Corg.netbeans.microedition.lcdui.SplashScreen">
@@ -63,7 +80,7 @@
                 </Component>
                 <Component componentID="29" typeID="Cjavax.microedition.lcdui.List">
                     <Property name="instanceName" typeID="Pjava.lang.String" value="Vlist"/>
-                    <Property name="commands" typeID="1C#CommandEventSource" value="A2:3_R313_R42"/>
+                    <Property name="commands" typeID="1C#CommandEventSource" value="A4:3_R313_R423_R513_R53"/>
                     <Property name="title" typeID="Pjava.lang.String" value="Vlist"/>
                     <Property name="commandListener" typeID="C#CommandListener" value="R7"/>
                     <Property name="elements" typeID="1C#ListElementEventSource" value="A1:3_R41"/>
@@ -88,6 +105,14 @@
                             <Property name="eventSource" typeID="C#EventSource" value="R42"/>
                             <Property name="mobileDevice" typeID="C#MobileDevice" value="R2"/>
                         </Component>
+                    </Component>
+                    <Component componentID="51" typeID="C#CommandEventSource">
+                        <Property name="displayable" typeID="Cjavax.microedition.lcdui.Displayable" value="R29"/>
+                        <Property name="command" typeID="Cjavax.microedition.lcdui.Command" value="R50"/>
+                    </Component>
+                    <Component componentID="53" typeID="C#CommandEventSource">
+                        <Property name="displayable" typeID="Cjavax.microedition.lcdui.Displayable" value="R29"/>
+                        <Property name="command" typeID="Cjavax.microedition.lcdui.Command" value="R52"/>
                     </Component>
                 </Component>
             </Component>
