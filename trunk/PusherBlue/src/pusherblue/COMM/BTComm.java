@@ -18,7 +18,7 @@ public class BTComm implements Runnable, DiscoveryListener {
 
     private DiscoveryAgent agent;
   
-    private Object lock = new Object();
+    private final Object lock = new Object();
     // list of RemoteDevice discovered
     private static Vector devices = new Vector();
     // list of ServiceRecord discovered for one RemoteDevice
@@ -43,7 +43,6 @@ public class BTComm implements Runnable, DiscoveryListener {
         try {
             device = LocalDevice.getLocalDevice();
             agent = device.getDiscoveryAgent();
-            //BTComm btcomm = new BTComm();
             System.out.println("Local: " + device.getBluetoothAddress() +
                     " (" + device.getFriendlyName() + ")");
 
@@ -58,24 +57,7 @@ public class BTComm implements Runnable, DiscoveryListener {
             }
             System.out.println("Device Inquiry Completed. ");
             System.out.println("Antal enheter i listan: " + devices.size());
-            //print all devices in vecDevices
-            /**int deviceCount=devices.size();
-            if(deviceCount <= 0){
-                System.out.println("No Devices Found .");
-            }
-            else{
-                //print bluetooth device addresses and names in the format [ No. address (name) ]
-                System.out.println("Bluetooth Devices: ");
-                for (int i = 0; i <deviceCount; i++) {
-                    RemoteDevice remoteDevice=(RemoteDevice)devices.elementAt(i);
-                    try {
-                        System.out.println((i + 1) + ". " + remoteDevice.getBluetoothAddress() + " (" + remoteDevice.getFriendlyName(true) + ")");
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                }
-            }
-            */
+
         } catch (BluetoothStateException exp) {
             System.err.println("Unexpected interruption: " + exp);
         }
