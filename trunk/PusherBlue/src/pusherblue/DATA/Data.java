@@ -9,6 +9,6 @@ package pusherblue.DATA;
  *
  * @author Niklas
  */
-public class Data {
+public interface Data {
 
 }

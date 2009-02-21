@@ -9,6 +9,6 @@ package pusherblue.DATA;
  *
  * @author Niklas
  */
-public class PM {
+public class PM implements Data{
 
 }
