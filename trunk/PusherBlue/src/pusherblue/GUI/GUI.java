@@ -11,6 +11,7 @@ import pusherblue.COMM.BTComm;
 import java.util.*;
 import javax.bluetooth.RemoteDevice;
 import org.netbeans.microedition.lcdui.SplashScreen;
+import pusherblue.CORE.Core;
 
 /**
  * @author Niklas
@@ -18,6 +19,7 @@ import org.netbeans.microedition.lcdui.SplashScreen;
 public class GUI extends MIDlet implements CommandListener {
 
     private boolean midletPaused = false;
+    private Core logic;
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Fields ">//GEN-BEGIN:|fields|0|
     private Command exitCommand;
@@ -34,7 +36,7 @@ public class GUI extends MIDlet implements CommandListener {
      * The GUI constructor.
      */
     public GUI() {
-
+        logic = logic.getInstance();
     }
     
     private void BTCommTestMethod(){
