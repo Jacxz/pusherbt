@@ -34,7 +34,7 @@ public class GUI extends MIDlet implements CommandListener {
     private List list;
     private Form sendPM;
     private StringItem pmTo;
-    private TextField textField;
+    private TextField sendText;
     private Form options;
     private TextField userName;
     private ChoiceGroup color;
@@ -42,6 +42,9 @@ public class GUI extends MIDlet implements CommandListener {
     private ChoiceGroup size;
     private ChoiceGroup font;
     private FileBrowser fileBrowser;
+    private Form readPM;
+    private StringItem pmFrom;
+    private TextField readText;
     private Font listFont;
     private Image splash;
     //</editor-fold>//GEN-END:|fields|0|
@@ -52,7 +55,6 @@ public class GUI extends MIDlet implements CommandListener {
     public GUI() {
         logic = new Core(this);
     }
-    
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Methods ">//GEN-BEGIN:|methods|0|
     //</editor-fold>//GEN-END:|methods|0|
@@ -165,28 +167,34 @@ public class GUI extends MIDlet implements CommandListener {
                 // write pre-action user code here
 //GEN-LINE:|7-commandAction|20|91-postAction
                 // write post-action user code here
-            }//GEN-BEGIN:|7-commandAction|21|71-preAction
-        } else if (displayable == sendPM) {
-            if (command == cancelCommand) {//GEN-END:|7-commandAction|21|71-preAction
+            }//GEN-BEGIN:|7-commandAction|21|102-preAction
+        } else if (displayable == readPM) {
+            if (command == cancelCommand) {//GEN-END:|7-commandAction|21|102-preAction
                 // write pre-action user code here
-                switchDisplayable(null, getList());//GEN-LINE:|7-commandAction|22|71-postAction
+                switchDisplayable(null, getList());//GEN-LINE:|7-commandAction|22|102-postAction
                 // write post-action user code here
-            } else if (command == sendPmCommand) {//GEN-LINE:|7-commandAction|23|74-preAction
+            }//GEN-BEGIN:|7-commandAction|23|71-preAction
+        } else if (displayable == sendPM) {
+            if (command == cancelCommand) {//GEN-END:|7-commandAction|23|71-preAction
+                // write pre-action user code here
+                switchDisplayable(null, getList());//GEN-LINE:|7-commandAction|24|71-postAction
+                // write post-action user code here
+            } else if (command == sendPmCommand) {//GEN-LINE:|7-commandAction|25|74-preAction
                 // write pre-action user code here
                 logic.sendPM(sendPM.get(0), sendPM.get(1));
-//GEN-LINE:|7-commandAction|24|74-postAction
+//GEN-LINE:|7-commandAction|26|74-postAction
                 // write post-action user code here
-            }//GEN-BEGIN:|7-commandAction|25|24-preAction
+            }//GEN-BEGIN:|7-commandAction|27|24-preAction
         } else if (displayable == splashScreen) {
-            if (command == SplashScreen.DISMISS_COMMAND) {//GEN-END:|7-commandAction|25|24-preAction
+            if (command == SplashScreen.DISMISS_COMMAND) {//GEN-END:|7-commandAction|27|24-preAction
                 // write pre-action user code here
-                switchDisplayable(null, getList());//GEN-LINE:|7-commandAction|26|24-postAction
+                switchDisplayable(null, getList());//GEN-LINE:|7-commandAction|28|24-postAction
                 // write post-action user code here
-            }//GEN-BEGIN:|7-commandAction|27|7-postCommandAction
-        }//GEN-END:|7-commandAction|27|7-postCommandAction
+            }//GEN-BEGIN:|7-commandAction|29|7-postCommandAction
+        }//GEN-END:|7-commandAction|29|7-postCommandAction
         // write post-action user code here
-    }//GEN-BEGIN:|7-commandAction|28|
-    //</editor-fold>//GEN-END:|7-commandAction|28|
+    }//GEN-BEGIN:|7-commandAction|30|
+    //</editor-fold>//GEN-END:|7-commandAction|30|
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Getter: exitCommand ">//GEN-BEGIN:|18-getter|0|18-preInit
     /**
@@ -256,8 +264,8 @@ public class GUI extends MIDlet implements CommandListener {
             list.setSelectCommand(null);
             list.setSelectedFlags(new boolean[] {  });//GEN-END:|29-getter|1|29-postInit
             // write post-init user code here
-            String users[] = {"Marcus", "Jacob"};
-            listUsers(users);
+            //String users[] = {"Marcus", "Jacob"};
+            listUsers(logic.listUsers());
         }//GEN-BEGIN:|29-getter|2|
         return list;
     }
@@ -331,7 +339,7 @@ public class GUI extends MIDlet implements CommandListener {
     public Form getSendPM() {
         if (sendPM == null) {//GEN-END:|62-getter|0|62-preInit
             // write pre-init user code here
-            sendPM = new Form("Send PM", new Item[] { getPmTo(), getTextField() });//GEN-BEGIN:|62-getter|1|62-postInit
+            sendPM = new Form("Send PM", new Item[] { getPmTo(), getSendText() });//GEN-BEGIN:|62-getter|1|62-postInit
             sendPM.addCommand(getCancelCommand());
             sendPM.addCommand(getSendPmCommand());
             sendPM.setCommandListener(this);//GEN-END:|62-getter|1|62-postInit
@@ -357,18 +365,18 @@ public class GUI extends MIDlet implements CommandListener {
     }
     //</editor-fold>//GEN-END:|68-getter|2|
 
-    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: textField ">//GEN-BEGIN:|69-getter|0|69-preInit
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: sendText ">//GEN-BEGIN:|69-getter|0|69-preInit
     /**
-     * Returns an initiliazed instance of textField component.
+     * Returns an initiliazed instance of sendText component.
      * @return the initialized component instance
      */
-    public TextField getTextField() {
-        if (textField == null) {//GEN-END:|69-getter|0|69-preInit
+    public TextField getSendText() {
+        if (sendText == null) {//GEN-END:|69-getter|0|69-preInit
             // write pre-init user code here
-            textField = new TextField("Message:", null, 150, TextField.ANY);//GEN-LINE:|69-getter|1|69-postInit
+            sendText = new TextField("Message:", null, 150, TextField.ANY);//GEN-LINE:|69-getter|1|69-postInit
             // write post-init user code here
         }//GEN-BEGIN:|69-getter|2|
-        return textField;
+        return sendText;
     }
     //</editor-fold>//GEN-END:|69-getter|2|
 
@@ -562,6 +570,53 @@ public class GUI extends MIDlet implements CommandListener {
     }
     //</editor-fold>//GEN-END:|93-getter|2|
 
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: readPM ">//GEN-BEGIN:|101-getter|0|101-preInit
+    /**
+     * Returns an initiliazed instance of readPM component.
+     * @return the initialized component instance
+     */
+    public Form getReadPM() {
+        if (readPM == null) {//GEN-END:|101-getter|0|101-preInit
+            // write pre-init user code here
+            readPM = new Form("readPM", new Item[] { getPmFrom(), getReadText() });//GEN-BEGIN:|101-getter|1|101-postInit
+            readPM.addCommand(getCancelCommand());
+            readPM.setCommandListener(this);//GEN-END:|101-getter|1|101-postInit
+            // write post-init user code here
+        }//GEN-BEGIN:|101-getter|2|
+        return readPM;
+    }
+    //</editor-fold>//GEN-END:|101-getter|2|
+
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: pmFrom ">//GEN-BEGIN:|104-getter|0|104-preInit
+    /**
+     * Returns an initiliazed instance of pmFrom component.
+     * @return the initialized component instance
+     */
+    public StringItem getPmFrom() {
+        if (pmFrom == null) {//GEN-END:|104-getter|0|104-preInit
+            // write pre-init user code here
+            pmFrom = new StringItem("From:", null);//GEN-LINE:|104-getter|1|104-postInit
+            // write post-init user code here
+        }//GEN-BEGIN:|104-getter|2|
+        return pmFrom;
+    }
+    //</editor-fold>//GEN-END:|104-getter|2|
+
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: readText ">//GEN-BEGIN:|105-getter|0|105-preInit
+    /**
+     * Returns an initiliazed instance of readText component.
+     * @return the initialized component instance
+     */
+    public TextField getReadText() {
+        if (readText == null) {//GEN-END:|105-getter|0|105-preInit
+            // write pre-init user code here
+            readText = new TextField("Message:", null, 32, TextField.ANY);//GEN-LINE:|105-getter|1|105-postInit
+            // write post-init user code here
+        }//GEN-BEGIN:|105-getter|2|
+        return readText;
+    }
+    //</editor-fold>//GEN-END:|105-getter|2|
+
     /**
      * Returns a display instance.
      * @return the display instance.
@@ -595,7 +650,7 @@ public class GUI extends MIDlet implements CommandListener {
 
     /**
      * ListUsers
-     *
+     * populates the list screen with users
      */
     private void listUsers(String[] users){
             for(int i = 0 ; i < users.length ; i++){
