@@ -37,10 +37,10 @@ public class GUI extends MIDlet implements CommandListener {
     private TextField textField;
     private Form options;
     private TextField userName;
-    private TextField downloads;
-    private ChoiceGroup font;
-    private ChoiceGroup size;
     private ChoiceGroup color;
+    private TextField downloads;
+    private ChoiceGroup size;
+    private ChoiceGroup font;
     private FileBrowser fileBrowser;
     private Font listFont;
     private Image splash;
@@ -173,6 +173,7 @@ public class GUI extends MIDlet implements CommandListener {
                 // write post-action user code here
             } else if (command == sendPmCommand) {//GEN-LINE:|7-commandAction|23|74-preAction
                 // write pre-action user code here
+                logic.sendPM(sendPM.get(0), sendPM.get(1));
 //GEN-LINE:|7-commandAction|24|74-postAction
                 // write post-action user code here
             }//GEN-BEGIN:|7-commandAction|25|24-preAction

@@ -17,7 +17,7 @@ import javax.microedition.io.Connector;
 import javax.microedition.io.StreamConnection;
 import javax.microedition.io.StreamConnectionNotifier;
 
-public class Server {
+public class Server extends Thread {
 
     StreamConnection con = null;
     StreamConnectionNotifier service = null;
@@ -25,45 +25,35 @@ public class Server {
     OutputStream op = null;
     UUID uuid = null;
 
-
-    //"btspp://localhost:"1111;name=ChatServer;authorize=false";
-    public Server() throws IOException {
-        //Extends a stream for client to connect
-        uuid = new UUID(0x1101);
-        StringBuffer url = new StringBuffer("btspp://");
-        url.append("localhost").append(':');
-        url.append(uuid.toString());
-        url.append(";name=ChatServer");
-        url.append(";authorize=false");
-        service = (StreamConnectionNotifier) Connector.open(url.toString());
-
-        //Server waiting for client to connect
-        System.out.println("Väntar på kontakt...");
-        con = service.acceptAndOpen();
-        System.out.println("Kontakt skapad...");
-        //Open streams for two way communication.
-        ip = con.openInputStream();
-        op = con.openOutputStream();
-        //Starts a new thread for reading data from inputstream
-        //while the present thread, goes forward and write data to outputstream
-        //thus enabling a two way communication with the client
-        ReadThread rdthr = new ReadThread(ip);
-        rdthr.start();
-        //int i = 0;
-        //while (true) {
-        //    writeData("Server skickar" + i);
-        //    i++;
-        //}
+    public Server(){
     }
-
+     public void run(){
+        try {
+            //Extends a stream for client to connect
+            uuid = new UUID(0x1101);
+            StringBuffer url = new StringBuffer("btspp://");
+            url.append("localhost").append(':');
+            url.append(uuid.toString());
+            url.append(";name=ChatServer");
+            url.append(";authorize=false");
+            service = (StreamConnectionNotifier) Connector.open(url.toString());
+            //Server waiting for client to connect
+            System.out.println("Väntar på kontakt...");
+            con = service.acceptAndOpen();
+            System.out.println("Kontakt skapad...");
+            //Open streams for two way communication.
+            ip = con.openInputStream();
+            //op = con.openOutputStream();
+            //Starts a new thread for reading data from inputstream
+            //while the present thread, goes forward and write data to outputstream
+            //thus enabling a two way communication with the client
+            ReadThread rdthr = new ReadThread(ip);
+            rdthr.start();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+     }
     /**
-    private void writeData(String msg) throws IOException {
-
-        op.write(msg.length());
-        op.write(msg.getBytes());
-    }
-    */
-
     class ReadThread extends Thread {
 
         InputStream ip = null;
@@ -120,5 +110,6 @@ public class Server {
             }
             return new String(data); // convert byte[] to String
         }
-    }
+      
+    }*/
 }

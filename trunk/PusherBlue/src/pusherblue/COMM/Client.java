@@ -2,8 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pusherblue.COMM;
+
 /**
  *
  * @author Niklas
@@ -34,67 +34,62 @@ public class Client implements DiscoveryListener {
     InputStream ip = null;
     OutputStream op = null;
 
-    public Client() throws IOException, InterruptedException {
-        localDevice = LocalDevice.getLocalDevice();
-        discoveryAgent = localDevice.getDiscoveryAgent();
-        //device = new RemoteDevice[10];
-// Starts inquiry for devices in the proximity and waits till the
-//inquiry is completed.
-        System.out.println("\nSearching for Devices...\n");
-        discoveryAgent.startInquiry(DiscoveryAgent.GIAC, this);
-        synchronized (this) {
-            this.wait();
+    public Client() {
+        try {
+            localDevice = LocalDevice.getLocalDevice();
+            discoveryAgent = localDevice.getDiscoveryAgent();
+        } catch (BluetoothStateException ex) {
+            ex.printStackTrace();
         }
-
-//Once the Device inquiry is completed it starts searching for the
-//required service. service search is done with the given uuid.
-//After starting each search it waits for the result. If the
-//connectionURL is null, ie, if No service Records obtained, then
-//it continues search in the next device detected.
-        int[] attrSet = {0, 3, 4, 0x100};
-        UUID[] uuids = new UUID[1];
-        uuids[0] = new UUID(0x1101);
-        for (int i = 0; i < device.size(); i++) {
-            RemoteDevice rd = (RemoteDevice) device.elementAt(i);
-            int transactionid = discoveryAgent.searchServices(attrSet, uuids, rd, this);
-
-            if (transactionid != -1) {
-                synchronized (this) {
-                    this.wait();
-                }
-                System.out.println(records[i].getConnectionURL(ServiceRecord.NOAUTHENTICATE_NOENCRYPT, false));
-
-            }
-
-            if (connectionURL != null) {
-                break;
-            }
-        }// end of forloop
-        //If the URL of the device begins with btspp, ie,of an SPP server then
-        //we call the getConnection meethod which
-        //establishes a connection with the SPPServer and returns it. Connection
-        // returned is of type  StreamConnection.
-        //A piece of raw data is being sent over RFCOMM.
-
-        if (connectionURL == null) {
-            System.out.println("No service available...........");
-        } else if (connectionURL.startsWith("btspp")) {
-            StreamConnection connection = getconnection();
-            op = connection.openOutputStream();
-            ip = connection.openInputStream();
-        }
-        //WriteThread wrthr = new WriteThread(op);
-        //wrthr.start();
-        //readThread rdthr = new readThread(ip);
-        //rdthr.start();
-        //int i = 0;
-        //while(true){
-        //   writeData("client skickar" + i );
-        //    i++;
-        //}
     }
 
-    public void writeData(String msg) throws IOException {
+    public void findDevices() {
+        try {
+            // Starts inquiry for devices in the proximity and waits till the
+            //inquiry is completed.
+            System.out.println("\nSearching for Devices...\n");
+            discoveryAgent.startInquiry(DiscoveryAgent.GIAC, this);
+            synchronized (this) {
+                this.wait();
+            }
+            //Once the Device inquiry is completed it starts searching for the
+            //required service. service search is done with the given uuid.
+            //After starting each search it waits for the result. If the
+            //connectionURL is null, ie, if No service Records obtained, then
+            // end of forloop
+            int[] attrSet = {0, 3, 4, 0x100};
+            UUID[] uuids = new UUID[1];
+            uuids[0] = new UUID(0x1101);
+            for (int i = 0; i < device.size(); i++) {
+                RemoteDevice rd = (RemoteDevice) device.elementAt(i);
+                int transactionid = discoveryAgent.searchServices(attrSet, uuids, rd, this);
+                if (transactionid != -1) {
+                    synchronized (this) {
+                        this.wait();
+                    }
+                    System.out.println(records[i].getConnectionURL(ServiceRecord.NOAUTHENTICATE_NOENCRYPT, false));
+                }
+                if (connectionURL != null) {
+                    break;
+                }
+            } // end of forloop
+
+            if (connectionURL == null) {
+                System.out.println("No service available...");
+            } else if (connectionURL.startsWith("btspp")) {
+                StreamConnection connection = getconnection();
+                op = connection.openOutputStream();
+                ip = connection.openInputStream();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+    public void writeData(String to, String msg) throws IOException {
 
         op.write(msg.length());
         op.write(msg.getBytes());
@@ -154,14 +149,15 @@ public class Client implements DiscoveryListener {
     public synchronized void inquiryCompleted(int discType) {
         this.notify();
     }
-
     StreamConnection getconnection() throws IOException {
         return (StreamConnection) Connector.open(connectionURL);
     }
-    public Vector getDevices(){
+
+    public Vector getDevices() {
         return device;
     }
-    public ServiceRecord[] getRecords(){
+
+    public ServiceRecord[] getRecords() {
         return records;
     }
 }
