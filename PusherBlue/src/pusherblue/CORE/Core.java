@@ -11,6 +11,7 @@ import pusherblue.COMM.Client;
 import pusherblue.COMM.Server;
 import pusherblue.DATA.Data;
 import pusherblue.DATA.PM;
+import pusherblue.GUI.GUI;
 
 /**
  *
@@ -23,14 +24,14 @@ public class Core {
     private Client cl;
     private Vector userList;
     private User mySelf;
-    private Core instance;
+    private GUI gui;
 
     /**
      * Constructor for Core
      */
-    private Core() {
+    public Core(GUI gui) {
         try {
-            instance = new Core();
+            this.gui = gui;
             userList = new Vector();
             svr = new Server();
             cl = new Client();
@@ -40,22 +41,12 @@ public class Core {
             ex.printStackTrace();
         }
     }
-    /**
-     * Singleton pattern to make sure there is only one Core object
-     * @return Core object
-     */
-    public Core getInstance() {
-        if (instance == null) {
-            instance = new Core();
-        }
-        return instance;
-    }
-
-    /**
+    /*
      * Processes current data
      * @param data
      * @return
      */
+
     public Data processData(Data data) {
         this.data = data;
 
@@ -103,7 +94,7 @@ public class Core {
         String names[] = null;
         for (int i = 0; i < userList.size(); i++) {
             User user = (User) userList.elementAt(i);
-            names[i] = user.getName(); 
+            names[i] = user.getName();
         }
         return names;
     }
