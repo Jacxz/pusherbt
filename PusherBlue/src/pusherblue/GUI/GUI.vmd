@@ -73,16 +73,16 @@
                     <Property name="label" typeID="Pjava.lang.String" value="VOptions"/>
                     <Property name="type" typeID="Pint" value="V1"/>
                 </Component>
-                <Component componentID="90" typeID="Cjavax.microedition.lcdui.Command">
-                    <Property name="instanceName" typeID="Pjava.lang.String" value="VsaveOptionsCommand"/>
-                    <Property name="label" typeID="Pjava.lang.String" value="VSave"/>
-                    <Property name="type" typeID="Pint" value="V4"/>
-                </Component>
                 <Component componentID="94" typeID="C#FileBrowserOpenCommand">
                     <Property name="label" typeID="Pjava.lang.String" value="VOpen File"/>
                     <Property name="type" typeID="Pint" value="V4"/>
                     <Property name="priority" typeID="Pint" value="V0"/>
                     <Property name="ordinary" typeID="Pboolean" value="Vfalse"/>
+                </Component>
+                <Component componentID="90" typeID="Cjavax.microedition.lcdui.Command">
+                    <Property name="instanceName" typeID="Pjava.lang.String" value="VsaveOptionsCommand"/>
+                    <Property name="label" typeID="Pjava.lang.String" value="VSave"/>
+                    <Property name="type" typeID="Pint" value="V4"/>
                 </Component>
                 <Component componentID="96" typeID="Cjavax.microedition.lcdui.Command">
                     <Property name="instanceName" typeID="Pjava.lang.String" value="VsendFile"/>
@@ -211,6 +211,11 @@
                         <Property name="maxSize" typeID="Pint" value="V32"/>
                         <Property name="constraints" typeID="Pint" value="V0"/>
                     </Component>
+                    <Component componentID="84" typeID="Cjavax.microedition.lcdui.ChoiceGroup">
+                        <Property name="instanceName" typeID="Pjava.lang.String" value="Vcolor"/>
+                        <Property name="label" typeID="Pjava.lang.String" value="VColor"/>
+                        <Property name="itemCommandListener" typeID="C#ItemCommandListener" value="R17"/>
+                    </Component>
                     <Component componentID="81" typeID="Cjavax.microedition.lcdui.TextField">
                         <Property name="instanceName" typeID="Pjava.lang.String" value="Vdownloads"/>
                         <Property name="label" typeID="Pjava.lang.String" value="VDownloads"/>
@@ -218,20 +223,15 @@
                         <Property name="maxSize" typeID="Pint" value="V32"/>
                         <Property name="constraints" typeID="Pint" value="V0"/>
                     </Component>
-                    <Component componentID="82" typeID="Cjavax.microedition.lcdui.ChoiceGroup">
-                        <Property name="instanceName" typeID="Pjava.lang.String" value="Vfont"/>
-                        <Property name="label" typeID="Pjava.lang.String" value="VFont"/>
-                        <Property name="itemCommandListener" typeID="C#ItemCommandListener" value="R17"/>
-                    </Component>
                     <Component componentID="83" typeID="Cjavax.microedition.lcdui.ChoiceGroup">
                         <Property name="instanceName" typeID="Pjava.lang.String" value="Vsize"/>
                         <Property name="label" typeID="Pjava.lang.String" value="VSize"/>
                         <Property name="itemCommandListener" typeID="C#ItemCommandListener" value="R17"/>
                         <Property name="choiceType" typeID="Pint" value="V4"/>
                     </Component>
-                    <Component componentID="84" typeID="Cjavax.microedition.lcdui.ChoiceGroup">
-                        <Property name="instanceName" typeID="Pjava.lang.String" value="Vcolor"/>
-                        <Property name="label" typeID="Pjava.lang.String" value="VColor"/>
+                    <Component componentID="82" typeID="Cjavax.microedition.lcdui.ChoiceGroup">
+                        <Property name="instanceName" typeID="Pjava.lang.String" value="Vfont"/>
+                        <Property name="label" typeID="Pjava.lang.String" value="VFont"/>
                         <Property name="itemCommandListener" typeID="C#ItemCommandListener" value="R17"/>
                     </Component>
                     <Component componentID="89" typeID="C#CommandEventSource">
@@ -285,11 +285,11 @@
         </Component>
     </Document>
     <FlowScene version="1">
+        <Node componentID="22" descriptorID="componentNode22" x="467" y="32"/>
+        <Node componentID="75" descriptorID="componentNode75" x="34" y="32"/>
+        <Node componentID="93" descriptorID="componentNode93" x="34" y="393"/>
+        <Node componentID="62" descriptorID="componentNode62" x="467" y="393"/>
         <Node componentID="29" descriptorID="componentNode29" x="273" y="181"/>
         <Node componentID="2" descriptorID="componentNode2" x="702" y="181"/>
-        <Node componentID="75" descriptorID="componentNode75" x="34" y="32"/>
-        <Node componentID="62" descriptorID="componentNode62" x="467" y="393"/>
-        <Node componentID="93" descriptorID="componentNode93" x="34" y="393"/>
-        <Node componentID="22" descriptorID="componentNode22" x="467" y="32"/>
     </FlowScene>
 </VisualDesign>

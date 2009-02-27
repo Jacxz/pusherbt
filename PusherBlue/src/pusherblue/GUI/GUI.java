@@ -7,7 +7,6 @@ package pusherblue.GUI;
 
 import javax.microedition.midlet.*;
 import javax.microedition.lcdui.*;
-import pusherblue.COMM.BTComm;
 import java.util.*;
 import javax.bluetooth.RemoteDevice;
 import org.netbeans.microedition.lcdui.SplashScreen;
@@ -54,15 +53,7 @@ public class GUI extends MIDlet implements CommandListener {
 //        logic = logic.getInstance();
     }
     
-    private void BTCommTestMethod(){
-        BTComm bt = new BTComm(); //
-        Vector vecDevs;
-        vecDevs = bt.getDevices();
-        System.out.println("GUI, antal enheter i vectorn: "+vecDevs.size());
-        for(int i = 0 ; i < vecDevs.size() ; i++){
-            System.out.println((i+1) + ". " + ((RemoteDevice)vecDevs.elementAt(i)).getBluetoothAddress());
-        }
-    }
+
     //<editor-fold defaultstate="collapsed" desc=" Generated Methods ">//GEN-BEGIN:|methods|0|
     //</editor-fold>//GEN-END:|methods|0|
 
@@ -73,7 +64,6 @@ public class GUI extends MIDlet implements CommandListener {
      */
     private void initialize() {//GEN-END:|0-initialize|0|0-preInitialize
         // write pre-initialize user code here
-        BTCommTestMethod();
 //GEN-LINE:|0-initialize|1|0-postInitialize
         // write post-initialize user code here
     }//GEN-BEGIN:|0-initialize|2|

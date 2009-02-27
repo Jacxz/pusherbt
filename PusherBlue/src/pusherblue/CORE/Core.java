@@ -7,7 +7,8 @@ package pusherblue.CORE;
 import java.io.IOException;
 import java.util.Vector;
 import javax.bluetooth.RemoteDevice;
-import pusherblue.COMM.BTComm;
+import pusherblue.COMM.Client;
+import pusherblue.COMM.Server;
 import pusherblue.DATA.Data;
 import pusherblue.DATA.PM;
 
@@ -18,7 +19,8 @@ import pusherblue.DATA.PM;
 public class Core {
 
     private Data data;
-    private BTComm bCom;
+    private Server svr;
+    private Client cl;
     private Vector userList;
     private User mySelf;
     private Core instance;
@@ -27,9 +29,16 @@ public class Core {
      * Constructor for Core
      */
     private Core() {
-        instance = new Core();
-        userList = new Vector();
-        bCom = new BTComm();
+        try {
+            instance = new Core();
+            userList = new Vector();
+            svr = new Server();
+            cl = new Client();
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
     /**
      * Singleton pattern to make sure there is only one Core object
@@ -69,7 +78,7 @@ public class Core {
     private void getUsers() {
 
         Vector devices = new Vector();
-        devices = bCom.getDevices();
+        devices = cl.getDevices();
 
         for (int i = 0; i < devices.size(); i++) {
             RemoteDevice device;
