@@ -12,7 +12,6 @@ import javax.bluetooth.RemoteDevice;
 import org.netbeans.microedition.lcdui.SplashScreen;
 import org.netbeans.microedition.lcdui.pda.FileBrowser;
 import pusherblue.CORE.Core;
-
 /**
  * @author Niklas
  */
@@ -181,7 +180,8 @@ public class GUI extends MIDlet implements CommandListener {
                 // write post-action user code here
             } else if (command == sendPmCommand) {//GEN-LINE:|7-commandAction|25|74-preAction
                 // write pre-action user code here
-                logic.sendPM(sendPM.get(0), sendPM.get(1));
+                logic.sendPM(((StringItem)sendPM.get(0)).getText(),
+                                    ((TextField)sendPM.get(1)).getString());
 //GEN-LINE:|7-commandAction|26|74-postAction
                 // write post-action user code here
             }//GEN-BEGIN:|7-commandAction|27|24-preAction

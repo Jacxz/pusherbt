@@ -31,12 +31,18 @@ public class Core {
      * Constructor for Core
      */
     public Core(GUI gui) {
-        
+        try {
             this.gui = gui;
             userList = new Vector();
             svr = new Server();
             svr.start();
             cl = new Client();
+            cl.findDevices();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
 
     }
     /*
@@ -60,9 +66,11 @@ public class Core {
     public void initChat() {
     }
 
-    public void sendPM(Item to, Item msg) {
+    public void sendPM(String to, String msg) {
         try {
-            cl.writeData(to.toString(), msg.toString());
+            System.out.println(msg);
+            cl.writeData(msg);
+        //cl.writeData(to.toString(), msg.toString());
         } catch (IOException ex) {
             ex.printStackTrace();
         }
