@@ -50,7 +50,7 @@ public class GUI extends MIDlet implements CommandListener {
      * The GUI constructor.
      */
     public GUI() {
-//        logic = logic.getInstance();
+        logic = new Core(this);
     }
     
 
