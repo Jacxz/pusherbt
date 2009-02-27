@@ -15,7 +15,7 @@ import pusherblue.DATA.PM;
 import pusherblue.GUI.GUI;
 
 /**
- *
+ *Class to handle logic
  * @author Olle & Henrik
  */
 public class Core {
@@ -29,6 +29,7 @@ public class Core {
 
     /**
      * Constructor for Core
+     * @param gui
      */
     public Core(GUI gui) {
         try {
@@ -36,7 +37,8 @@ public class Core {
             userList = new Vector();
             svr = new Server();
             svr.start();
-            cl = new Client();
+            cl = new Client(); 
+            getUsers(); 
             cl.findDevices();
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -77,7 +79,7 @@ public class Core {
     }
 
     /**
-     * Gets a vector with remoteDevices from BTcomm.
+     * Gets a vector with remoteDevices from Client.
      * Retreives info from vector and stores it into User objects
      */
     private void getUsers() {
