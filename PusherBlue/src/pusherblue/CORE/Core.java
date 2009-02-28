@@ -7,6 +7,7 @@ package pusherblue.CORE;
 import java.io.IOException;
 import java.util.Vector;
 import javax.bluetooth.RemoteDevice;
+import javax.bluetooth.ServiceRecord;
 import javax.microedition.lcdui.Item;
 import pusherblue.COMM.Client;
 import pusherblue.COMM.Server;
@@ -26,6 +27,7 @@ public class Core {
     private Vector userList;
     private User mySelf;
     private GUI gui;
+    private Vector devices = null;
 
     /**
      * Constructor for Core
@@ -39,7 +41,11 @@ public class Core {
             svr.start();
             cl = new Client(); 
             getUsers(); 
-            cl.findDevices();
+            //listUsers();
+            userList = getUsers();
+            
+            //devices = cl.findDevices();
+
         } catch (IOException ex) {
             ex.printStackTrace();
         } catch (InterruptedException ex) {
@@ -67,38 +73,44 @@ public class Core {
      */
     public void initChat() {
     }
-
+    public void showPM(String from, String msg){
+        //gui
+    }
     public void sendPM(String to, String msg) {
         try {
             System.out.println(msg);
-            cl.writeData(msg);
-        //cl.writeData(to.toString(), msg.toString());
+            cl.writeData(to, msg);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
-    /**
+        /**
      * Gets a vector with remoteDevices from Client.
      * Retreives info from vector and stores it into User objects
      */
-    private void getUsers() {
-
-        Vector devices = new Vector();
-        devices = cl.getDevices();
-
-        for (int i = 0; i < devices.size(); i++) {
-            RemoteDevice device;
-            device = (RemoteDevice) devices.elementAt(i);
-            User user = null;
-            try {
-                user = new User(device.getFriendlyName(false), device.getBluetoothAddress());
-            } catch (IOException ex) {
-                System.out.println("Problem getting friendlyname...");
-                ex.printStackTrace();
+    public Vector getUsers() {
+        try {
+            devices = cl.findDevices();
+            for (int i = 0; i < devices.size(); i++) {
+                RemoteDevice device;
+                device = (RemoteDevice) devices.elementAt(i);
+                User user = null;
+                try {
+                    user = new User(device.getFriendlyName(false), device.getBluetoothAddress());
+                } catch (IOException ex) {
+                    System.out.println("Problem getting friendlyname...");
+                    ex.printStackTrace();
+                }
+                userList.addElement(user);
             }
-            userList.addElement(user);
+            
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
         }
+        return userList;
     }
 
     /**
@@ -106,8 +118,8 @@ public class Core {
      * @return Array of user names
      */
     public String[] listUsers() {
-
-        String names[] = null;
+        //getUsers();
+        String names[] = new String[userList.size()];
         for (int i = 0; i < userList.size(); i++) {
             User user = (User) userList.elementAt(i);
             names[i] = user.getName();

@@ -53,6 +53,8 @@ public class GUI extends MIDlet implements CommandListener {
      */
     public GUI() {
         logic = new Core(this);
+        //String[] ss = logic.listUsers();
+        //listUsers(ss);
     }
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Methods ">//GEN-BEGIN:|methods|0|
@@ -148,8 +150,9 @@ public class GUI extends MIDlet implements CommandListener {
             } else if (command == updateCommand) {//GEN-LINE:|7-commandAction|13|51-preAction
                 // write pre-action user code here
                 list.deleteAll();
-                String[] majs = {"Olle", "Henke"};
-                listUsers(majs);
+                //String[] majs = {"Olle", "Henke"};
+                String[] s = logic.listUsers();
+                listUsers(s);
 //GEN-LINE:|7-commandAction|14|51-postAction
                 // write post-action user code here
             } else if (command == writePMCommand) {//GEN-LINE:|7-commandAction|15|53-preAction
@@ -264,8 +267,8 @@ public class GUI extends MIDlet implements CommandListener {
             list.setSelectCommand(null);
             list.setSelectedFlags(new boolean[] {  });//GEN-END:|29-getter|1|29-postInit
             // write post-init user code here
-            //String users[] = {"Marcus", "Jacob"};
-            listUsers(logic.listUsers());
+            String users[] = {"Marcus", "Jacob"};
+            listUsers(users); //logic.listUsers());
         }//GEN-BEGIN:|29-getter|2|
         return list;
     }
@@ -672,8 +675,8 @@ public class GUI extends MIDlet implements CommandListener {
     /**
      * Called to display PM.
      */
-    private void displayPM(){
-
+    private void displayPM(String from, String msg){
+        
     }
 
     /**

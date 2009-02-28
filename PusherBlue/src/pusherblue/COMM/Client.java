@@ -8,6 +8,7 @@ import java.io.*;
 import java.util.Vector;
 import javax.bluetooth.*;
 import javax.microedition.io.*;
+import pusherblue.DATA.Data;
 
 /*
  * To change this template, choose Tools | Templates
@@ -35,7 +36,7 @@ public class Client implements DiscoveryListener {
         discoveryAgent = localDevice.getDiscoveryAgent();
     }
 
-    public void findDevices() throws IOException, InterruptedException {
+    public Vector findDevices() throws IOException, InterruptedException {
 // Starts inquiry for devices in the proximity and waits till the
 //inquiry is completed.
         System.out.println("\nSearching for Devices...\n");
@@ -63,11 +64,12 @@ public class Client implements DiscoveryListener {
                 System.out.println(records[i].getConnectionURL(ServiceRecord.NOAUTHENTICATE_NOENCRYPT, false));
 
             }
-
-            if (connectionURL != null) {
-                break;
-            }
-        }// end of forloop
+        /**
+        if (connectionURL != null) {
+        break;
+        } */
+        }
+        /** // end of forloop
         //If the URL of the device begins with btspp, ie,of an SPP server then
         //we call the getConnection meethod which
         //establishes a connection with the SPPServer and returns it. Connection
@@ -75,24 +77,53 @@ public class Client implements DiscoveryListener {
         //A piece of raw data is being sent over RFCOMM.
 
         if (connectionURL == null) {
-            System.out.println("No service available...........");
+        System.out.println("No service available...........");
         } else if (connectionURL.startsWith("btspp")) {
-            StreamConnection connection = getconnection();
-            op = connection.openOutputStream();
-            ip = connection.openInputStream();
-        }
+        StreamConnection connection = getconnection();
+        op = connection.openOutputStream();
+        ip = connection.openInputStream();
+        //tas bort
+        } */
+        return device;
     }
 
-    public void writeData(String msg) throws IOException {
-
+    public void writeData(String to, String msg) throws IOException {
+        ServiceRecord sr = getRemote(to);
+        sr.getConnectionURL(ServiceRecord.NOAUTHENTICATE_NOENCRYPT, false);
+        StreamConnection connection = getconnection();
+        op = connection.openOutputStream();
         op.write(msg.length());
         op.write(msg.getBytes());
+        op.close();
+        connection.close();
+
     }
 
+    private ServiceRecord getRemote(String to) {
+        ServiceRecord sr = null;
+
+        RemoteDevice rd;
+        for (int i = 0; i < device.size(); i++) {
+            rd = (RemoteDevice) device.elementAt(i);
+            try {
+                if (to.equals(rd.getFriendlyName(false))) {
+                    sr = records[i];
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return sr;
+    }
 //When a device is discovered it is added to the remote device table.
+
     public synchronized void deviceDiscovered(RemoteDevice btDevice, DeviceClass cod) {
-        System.out.println("New Device discovered : " + btDevice.getBluetoothAddress());
-        device.addElement(btDevice);
+        try {
+            System.out.println("New Device discovered : " + btDevice.getFriendlyName(false) + " (" + btDevice.getBluetoothAddress() + ")");
+            device.addElement(btDevice);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
 //When a service is discovered in a particular device and the connection url is not null //then the thread that is waiting in the main is notified.
@@ -148,11 +179,11 @@ public class Client implements DiscoveryListener {
         return (StreamConnection) Connector.open(connectionURL);
     }
 
-    public Vector getDevices() {
-        return device;
-    }
+    //public Vector getDevices() {
+    //    return device;
+    //}
 
-    public ServiceRecord[] getRecords() {
-        return records;
-    }
+    //public ServiceRecord[] getRecords() {
+    //    return records;
+    //}
 }
