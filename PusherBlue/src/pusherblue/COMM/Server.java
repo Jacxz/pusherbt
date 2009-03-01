@@ -32,6 +32,7 @@ public class Server extends Thread {
 
     public void run() {
         try {
+
             //Extends a stream for client to connect
             uuid = new UUID(0x1101);
             StringBuffer url = new StringBuffer("btspp://");
@@ -39,19 +40,16 @@ public class Server extends Thread {
             url.append(uuid.toString());
             url.append(";name=ChatServer");
             url.append(";authorize=false");
-            service = (StreamConnectionNotifier) Connector.open(url.toString());
-            //Server waiting for client to connect
-            System.out.println("Väntar på kontakt...");
-            con = service.acceptAndOpen();
-            System.out.println("Kontakt skapad...");
-            //Open streams for two way communication.
-            ip = con.openInputStream();
-            //Starts a new thread for reading data from inputstream
-            //while the present thread, goes forward and write data to outputstream
-            //thus enabling a two way communication with the client
-            ReadThread rdthr = new ReadThread(ip, logic);
-            rdthr.start();
-        //con.close();
+            while (true) {
+                service = (StreamConnectionNotifier) Connector.open(url.toString());
+                //Server waiting for client to connect
+                System.out.println("Väntar på kontakt...");
+                con = service.acceptAndOpen();
+                System.out.println("Kontakt skapad...");
+                //Starts a new thread for reading data from inputstream
+                ReadThread rdthr = new ReadThread(con, logic);
+                rdthr.start();
+            }
         } catch (IOException ex) {
             ex.printStackTrace();
         }

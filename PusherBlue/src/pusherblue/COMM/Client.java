@@ -8,7 +8,6 @@ import java.io.*;
 import java.util.Vector;
 import javax.bluetooth.*;
 import javax.microedition.io.*;
-import pusherblue.DATA.Data;
 
 /*
  * To change this template, choose Tools | Templates
@@ -26,10 +25,11 @@ public class Client implements DiscoveryListener {
     private Vector device = new Vector();
     private Vector records = new Vector();
     //private ServiceRecord[] records = null;
-    int count = 0;
-    int maxSearches = 10;
-    InputStream ip = null;
-    OutputStream op = null;
+    private int count = 0;
+    private int maxSearches = 10;
+    private InputStream ip = null;
+    private OutputStream op = null;
+    private boolean isSending = true;
 
     public Client() throws IOException, InterruptedException {
         localDevice = LocalDevice.getLocalDevice();
@@ -88,16 +88,19 @@ public class Client implements DiscoveryListener {
     }
 
     public void writeData(String to, String msg) throws IOException {
-        ServiceRecord sr = getRemote(to);
-        sr.getConnectionURL(ServiceRecord.NOAUTHENTICATE_NOENCRYPT, false);
-        StreamConnection connection = getconnection();
-        op = connection.openOutputStream();
-        String message = new String(localDevice.getFriendlyName() + ":" + msg);
-        op.write(message.length());
-        op.write(message.getBytes());
-        op.close();
-        connection.close();
-
+        if (msg.length() > 0) {
+            ServiceRecord sr = getRemote(to);
+            sr.getConnectionURL(ServiceRecord.NOAUTHENTICATE_NOENCRYPT, false);
+            Thread wt = new WriteThread(connectionURL,
+                    localDevice.getFriendlyName(), msg);
+            wt.start();
+        }
+    /**op = connection.openOutputStream();
+    String message = new String( + ":" + msg);
+    System.out.println("- - - Skickar: " + message);
+    op.write(message.length());
+    op.write(message.getBytes());
+    op.close(); */
     }
 
     private ServiceRecord getRemote(String to) {
@@ -184,7 +187,6 @@ public class Client implements DiscoveryListener {
     StreamConnection getconnection() throws IOException {
         return (StreamConnection) Connector.open(connectionURL);
     }
-
     //public Vector getDevices() {
     //    return device;
     //}
