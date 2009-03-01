@@ -2,16 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pusherblue.GUI;
 
 import javax.microedition.midlet.*;
 import javax.microedition.lcdui.*;
-import java.util.*;
-import javax.bluetooth.RemoteDevice;
 import org.netbeans.microedition.lcdui.SplashScreen;
 import org.netbeans.microedition.lcdui.pda.FileBrowser;
 import pusherblue.CORE.Core;
+
 /**
  * @author Niklas
  */
@@ -53,8 +51,6 @@ public class GUI extends MIDlet implements CommandListener {
      */
     public GUI() {
         logic = new Core(this);
-        //String[] ss = logic.listUsers();
-        //listUsers(ss);
     }
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Methods ">//GEN-BEGIN:|methods|0|
@@ -79,7 +75,7 @@ public class GUI extends MIDlet implements CommandListener {
     public void startMIDlet() {//GEN-END:|3-startMIDlet|0|3-preAction
         // write pre-action user code here
         switchDisplayable(null, getSplashScreen());//GEN-LINE:|3-startMIDlet|1|3-postAction
-        // write post-action user code here
+    // write post-action user code here
     }//GEN-BEGIN:|3-startMIDlet|2|
     //</editor-fold>//GEN-END:|3-startMIDlet|2|
 
@@ -108,7 +104,7 @@ public class GUI extends MIDlet implements CommandListener {
         } else {
             display.setCurrent(alert, nextDisplayable);
         }//GEN-END:|5-switchDisplayable|1|5-postSwitch
-        // write post-switch user code here
+    // write post-switch user code here
     }//GEN-BEGIN:|5-switchDisplayable|2|
     //</editor-fold>//GEN-END:|5-switchDisplayable|2|
 
@@ -128,43 +124,40 @@ public class GUI extends MIDlet implements CommandListener {
             } else if (command == cancelCommand) {//GEN-LINE:|7-commandAction|3|99-preAction
                 // write pre-action user code here
                 switchDisplayable(null, getList());//GEN-LINE:|7-commandAction|4|99-postAction
-                // write post-action user code here
+            // write post-action user code here
             }//GEN-BEGIN:|7-commandAction|5|31-preAction
         } else if (displayable == list) {
             if (command == List.SELECT_COMMAND) {//GEN-END:|7-commandAction|5|31-preAction
                 // write pre-action user code here
                 listAction();//GEN-LINE:|7-commandAction|6|31-postAction
-                // write post-action user code here
+            // write post-action user code here
             } else if (command == exitCommand) {//GEN-LINE:|7-commandAction|7|42-preAction
                 // write pre-action user code here
                 exitMIDlet();//GEN-LINE:|7-commandAction|8|42-postAction
-                // write post-action user code here
+            // write post-action user code here
             } else if (command == optionsCommand) {//GEN-LINE:|7-commandAction|9|86-preAction
                 // write pre-action user code here
                 switchDisplayable(null, getOptions());//GEN-LINE:|7-commandAction|10|86-postAction
-                // write post-action user code here
+            // write post-action user code here
             } else if (command == sendFile) {//GEN-LINE:|7-commandAction|11|97-preAction
                 // write pre-action user code here
                 switchDisplayable(null, getFileBrowser());//GEN-LINE:|7-commandAction|12|97-postAction
-                // write post-action user code here
+            // write post-action user code here
             } else if (command == updateCommand) {//GEN-LINE:|7-commandAction|13|51-preAction
                 // write pre-action user code here
-                list.deleteAll();
-                //String[] majs = {"Olle", "Henke"};
-                String[] s = logic.listUsers();
-                listUsers(s);
+                listUsers(logic.listUsers());
 //GEN-LINE:|7-commandAction|14|51-postAction
-                // write post-action user code here
+            // write post-action user code here
             } else if (command == writePMCommand) {//GEN-LINE:|7-commandAction|15|53-preAction
                 // write pre-action user code here
                 switchDisplayable(null, getSendPM());//GEN-LINE:|7-commandAction|16|53-postAction
-                // write post-action user code here
+            // write post-action user code here
             }//GEN-BEGIN:|7-commandAction|17|89-preAction
         } else if (displayable == options) {
             if (command == cancelCommand) {//GEN-END:|7-commandAction|17|89-preAction
                 // write pre-action user code here
                 switchDisplayable(null, getList());//GEN-LINE:|7-commandAction|18|89-postAction
-                // write post-action user code here
+            // write post-action user code here
             } else if (command == saveOptionsCommand) {//GEN-LINE:|7-commandAction|19|91-preAction
                 // write pre-action user code here
 //GEN-LINE:|7-commandAction|20|91-postAction
@@ -174,28 +167,29 @@ public class GUI extends MIDlet implements CommandListener {
             if (command == cancelCommand) {//GEN-END:|7-commandAction|21|102-preAction
                 // write pre-action user code here
                 switchDisplayable(null, getList());//GEN-LINE:|7-commandAction|22|102-postAction
-                // write post-action user code here
+            // write post-action user code here
             }//GEN-BEGIN:|7-commandAction|23|71-preAction
         } else if (displayable == sendPM) {
             if (command == cancelCommand) {//GEN-END:|7-commandAction|23|71-preAction
                 // write pre-action user code here
                 switchDisplayable(null, getList());//GEN-LINE:|7-commandAction|24|71-postAction
-                // write post-action user code here
+            // write post-action user code here
             } else if (command == sendPmCommand) {//GEN-LINE:|7-commandAction|25|74-preAction
                 // write pre-action user code here
-                logic.sendPM(((StringItem)sendPM.get(0)).getText(),
-                                    ((TextField)sendPM.get(1)).getString());
+                logic.sendPM(((StringItem) sendPM.get(0)).getText(),
+                        ((TextField) sendPM.get(1)).getString());
+                switchDisplayable(null, getList());
 //GEN-LINE:|7-commandAction|26|74-postAction
-                // write post-action user code here
+            // write post-action user code here
             }//GEN-BEGIN:|7-commandAction|27|24-preAction
         } else if (displayable == splashScreen) {
             if (command == SplashScreen.DISMISS_COMMAND) {//GEN-END:|7-commandAction|27|24-preAction
                 // write pre-action user code here
                 switchDisplayable(null, getList());//GEN-LINE:|7-commandAction|28|24-postAction
-                // write post-action user code here
+            // write post-action user code here
             }//GEN-BEGIN:|7-commandAction|29|7-postCommandAction
         }//GEN-END:|7-commandAction|29|7-postCommandAction
-        // write post-action user code here
+    // write post-action user code here
     }//GEN-BEGIN:|7-commandAction|30|
     //</editor-fold>//GEN-END:|7-commandAction|30|
 
@@ -208,7 +202,7 @@ public class GUI extends MIDlet implements CommandListener {
         if (exitCommand == null) {//GEN-END:|18-getter|0|18-preInit
             // write pre-init user code here
             exitCommand = new Command("Exit", Command.EXIT, 0);//GEN-LINE:|18-getter|1|18-postInit
-            // write post-init user code here
+        // write post-init user code here
         }//GEN-BEGIN:|18-getter|2|
         return exitCommand;
     }
@@ -227,8 +221,8 @@ public class GUI extends MIDlet implements CommandListener {
             splashScreen.setCommandListener(this);
             splashScreen.setFullScreenMode(true);
             splashScreen.setImage(getSplash());
-            splashScreen.setTimeout(2000);//GEN-END:|22-getter|1|22-postInit
-            // write post-init user code here
+            splashScreen.setTimeout(100);//GEN-END:|22-getter|1|22-postInit
+        // write post-init user code here
         }//GEN-BEGIN:|22-getter|2|
         return splashScreen;
     }
@@ -243,7 +237,7 @@ public class GUI extends MIDlet implements CommandListener {
         if (listFont == null) {//GEN-END:|27-getter|0|27-preInit
             // write pre-init user code here
             listFont = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_SMALL);//GEN-LINE:|27-getter|1|27-postInit
-            // write post-init user code here
+        // write post-init user code here
         }//GEN-BEGIN:|27-getter|2|
         return listFont;
     }
@@ -267,8 +261,9 @@ public class GUI extends MIDlet implements CommandListener {
             list.setSelectCommand(null);
             list.setSelectedFlags(new boolean[] {  });//GEN-END:|29-getter|1|29-postInit
             // write post-init user code here
-            String users[] = {"Marcus", "Jacob"};
-            listUsers(users); //logic.listUsers());
+            String users[] = {"  Remote devicelist..."};
+            listUsers(users);
+        //listUsers(logic.listUsers());
         }//GEN-BEGIN:|29-getter|2|
         return list;
     }
@@ -281,7 +276,7 @@ public class GUI extends MIDlet implements CommandListener {
     public void listAction() {//GEN-END:|29-action|0|29-preAction
         // enter pre-action user code here
         String __selectedString = getList().getString(getList().getSelectedIndex());//GEN-LINE:|29-action|1|29-postAction
-        // enter post-action user code here
+    // enter post-action user code here
     }//GEN-BEGIN:|29-action|2|
     //</editor-fold>//GEN-END:|29-action|2|
 
@@ -294,7 +289,7 @@ public class GUI extends MIDlet implements CommandListener {
         if (updateCommand == null) {//GEN-END:|50-getter|0|50-preInit
             // write pre-init user code here
             updateCommand = new Command("Update", Command.SCREEN, 0);//GEN-LINE:|50-getter|1|50-postInit
-            // write post-init user code here
+        // write post-init user code here
         }//GEN-BEGIN:|50-getter|2|
         return updateCommand;
     }
@@ -309,7 +304,7 @@ public class GUI extends MIDlet implements CommandListener {
         if (writePMCommand == null) {//GEN-END:|52-getter|0|52-preInit
             // write pre-init user code here
             writePMCommand = new Command("Send Pm", Command.ITEM, 0);//GEN-LINE:|52-getter|1|52-postInit
-            // write post-init user code here
+        // write post-init user code here
         }//GEN-BEGIN:|52-getter|2|
         return writePMCommand;
     }
@@ -328,7 +323,7 @@ public class GUI extends MIDlet implements CommandListener {
             } catch (java.io.IOException e) {//GEN-END:|56-getter|1|56-@java.io.IOException
                 e.printStackTrace();
             }//GEN-LINE:|56-getter|2|56-postInit
-            // write post-init user code here
+        // write post-init user code here
         }//GEN-BEGIN:|56-getter|3|
         return splash;
     }
@@ -346,7 +341,7 @@ public class GUI extends MIDlet implements CommandListener {
             sendPM.addCommand(getCancelCommand());
             sendPM.addCommand(getSendPmCommand());
             sendPM.setCommandListener(this);//GEN-END:|62-getter|1|62-postInit
-            // write post-init user code here
+        // write post-init user code here
         }//GEN-BEGIN:|62-getter|2|
         return sendPM;
     }
@@ -377,7 +372,7 @@ public class GUI extends MIDlet implements CommandListener {
         if (sendText == null) {//GEN-END:|69-getter|0|69-preInit
             // write pre-init user code here
             sendText = new TextField("Message:", null, 150, TextField.ANY);//GEN-LINE:|69-getter|1|69-postInit
-            // write post-init user code here
+        // write post-init user code here
         }//GEN-BEGIN:|69-getter|2|
         return sendText;
     }
@@ -392,7 +387,7 @@ public class GUI extends MIDlet implements CommandListener {
         if (cancelCommand == null) {//GEN-END:|70-getter|0|70-preInit
             // write pre-init user code here
             cancelCommand = new Command("Cancel", Command.CANCEL, 0);//GEN-LINE:|70-getter|1|70-postInit
-            // write post-init user code here
+        // write post-init user code here
         }//GEN-BEGIN:|70-getter|2|
         return cancelCommand;
     }
@@ -407,7 +402,7 @@ public class GUI extends MIDlet implements CommandListener {
         if (sendPmCommand == null) {//GEN-END:|73-getter|0|73-preInit
             // write pre-init user code here
             sendPmCommand = new Command("Send", Command.OK, 0);//GEN-LINE:|73-getter|1|73-postInit
-            // write post-init user code here
+        // write post-init user code here
         }//GEN-BEGIN:|73-getter|2|
         return sendPmCommand;
     }
@@ -425,7 +420,7 @@ public class GUI extends MIDlet implements CommandListener {
             options.addCommand(getCancelCommand());
             options.addCommand(getSaveOptionsCommand());
             options.setCommandListener(this);//GEN-END:|75-getter|1|75-postInit
-            // write post-init user code here
+        // write post-init user code here
         }//GEN-BEGIN:|75-getter|2|
         return options;
     }
@@ -441,7 +436,7 @@ public class GUI extends MIDlet implements CommandListener {
             // write pre-init user code here
             userName = new TextField("Name:", null, 32, TextField.ANY);//GEN-BEGIN:|77-getter|1|77-postInit
             userName.setLayout(ImageItem.LAYOUT_LEFT | ImageItem.LAYOUT_NEWLINE_AFTER | Item.LAYOUT_2);//GEN-END:|77-getter|1|77-postInit
-            // write post-init user code here
+        // write post-init user code here
         }//GEN-BEGIN:|77-getter|2|
         return userName;
     }
@@ -456,7 +451,7 @@ public class GUI extends MIDlet implements CommandListener {
         if (downloads == null) {//GEN-END:|81-getter|0|81-preInit
             // write pre-init user code here
             downloads = new TextField("Downloads", null, 32, TextField.ANY);//GEN-LINE:|81-getter|1|81-postInit
-            // write post-init user code here
+        // write post-init user code here
         }//GEN-BEGIN:|81-getter|2|
         return downloads;
     }
@@ -471,7 +466,7 @@ public class GUI extends MIDlet implements CommandListener {
         if (font == null) {//GEN-END:|82-getter|0|82-preInit
             // write pre-init user code here
             font = new ChoiceGroup("Font", Choice.MULTIPLE);//GEN-LINE:|82-getter|1|82-postInit
-            // write post-init user code here
+        // write post-init user code here
         }//GEN-BEGIN:|82-getter|2|
         return font;
     }
@@ -503,7 +498,7 @@ public class GUI extends MIDlet implements CommandListener {
         if (color == null) {//GEN-END:|84-getter|0|84-preInit
             // write pre-init user code here
             color = new ChoiceGroup("Color", Choice.MULTIPLE);//GEN-LINE:|84-getter|1|84-postInit
-            // write post-init user code here
+        // write post-init user code here
         }//GEN-BEGIN:|84-getter|2|
         return color;
     }
@@ -518,7 +513,7 @@ public class GUI extends MIDlet implements CommandListener {
         if (optionsCommand == null) {//GEN-END:|85-getter|0|85-preInit
             // write pre-init user code here
             optionsCommand = new Command("Options", Command.SCREEN, 0);//GEN-LINE:|85-getter|1|85-postInit
-            // write post-init user code here
+        // write post-init user code here
         }//GEN-BEGIN:|85-getter|2|
         return optionsCommand;
     }
@@ -533,7 +528,7 @@ public class GUI extends MIDlet implements CommandListener {
         if (saveOptionsCommand == null) {//GEN-END:|90-getter|0|90-preInit
             // write pre-init user code here
             saveOptionsCommand = new Command("Save", Command.OK, 0);//GEN-LINE:|90-getter|1|90-postInit
-            // write post-init user code here
+        // write post-init user code here
         }//GEN-BEGIN:|90-getter|2|
         return saveOptionsCommand;
     }
@@ -548,7 +543,7 @@ public class GUI extends MIDlet implements CommandListener {
         if (sendFile == null) {//GEN-END:|96-getter|0|96-preInit
             // write pre-init user code here
             sendFile = new Command("Send File", Command.SCREEN, 1);//GEN-LINE:|96-getter|1|96-postInit
-            // write post-init user code here
+        // write post-init user code here
         }//GEN-BEGIN:|96-getter|2|
         return sendFile;
     }
@@ -567,7 +562,7 @@ public class GUI extends MIDlet implements CommandListener {
             fileBrowser.setCommandListener(this);
             fileBrowser.addCommand(FileBrowser.SELECT_FILE_COMMAND);
             fileBrowser.addCommand(getCancelCommand());//GEN-END:|93-getter|1|93-postInit
-            // write post-init user code here
+        // write post-init user code here
         }//GEN-BEGIN:|93-getter|2|
         return fileBrowser;
     }
@@ -584,6 +579,7 @@ public class GUI extends MIDlet implements CommandListener {
             readPM = new Form("readPM", new Item[] { getPmFrom(), getReadText() });//GEN-BEGIN:|101-getter|1|101-postInit
             readPM.addCommand(getCancelCommand());
             readPM.setCommandListener(this);//GEN-END:|101-getter|1|101-postInit
+
             // write post-init user code here
         }//GEN-BEGIN:|101-getter|2|
         return readPM;
@@ -599,6 +595,7 @@ public class GUI extends MIDlet implements CommandListener {
         if (pmFrom == null) {//GEN-END:|104-getter|0|104-preInit
             // write pre-init user code here
             pmFrom = new StringItem("From:", null);//GEN-LINE:|104-getter|1|104-postInit
+
             // write post-init user code here
         }//GEN-BEGIN:|104-getter|2|
         return pmFrom;
@@ -614,7 +611,7 @@ public class GUI extends MIDlet implements CommandListener {
         if (readText == null) {//GEN-END:|105-getter|0|105-preInit
             // write pre-init user code here
             readText = new TextField("Message:", null, 32, TextField.ANY);//GEN-LINE:|105-getter|1|105-postInit
-            // write post-init user code here
+        // write post-init user code here
         }//GEN-BEGIN:|105-getter|2|
         return readText;
     }
@@ -624,7 +621,7 @@ public class GUI extends MIDlet implements CommandListener {
      * Returns a display instance.
      * @return the display instance.
      */
-    public Display getDisplay () {
+    public Display getDisplay() {
         return Display.getDisplay(this);
     }
 
@@ -632,7 +629,7 @@ public class GUI extends MIDlet implements CommandListener {
      * Exits MIDlet.
      */
     public void exitMIDlet() {
-        switchDisplayable (null, null);
+        switchDisplayable(null, null);
         destroyApp(true);
         notifyDestroyed();
     }
@@ -643,10 +640,10 @@ public class GUI extends MIDlet implements CommandListener {
      */
     public void startApp() {
         if (midletPaused) {
-            resumeMIDlet ();
+            resumeMIDlet();
         } else {
-            initialize ();
-            startMIDlet ();
+            initialize();
+            startMIDlet();
         }
         midletPaused = false;
     }
@@ -655,29 +652,43 @@ public class GUI extends MIDlet implements CommandListener {
      * ListUsers
      * populates the list screen with users
      */
-    private void listUsers(String[] users){
-            for(int i = 0 ; i < users.length ; i++){
+    private void listUsers(String[] users) {
+
+        if (users.length > 0) {
+            list.deleteAll();
+            for (int i = 0; i < users.length; i++) {
                 list.insert(i, users[i], null);
             }
-            for(int i = 0 ; i < users.length ; i++){
+            for (int i = 0; i < users.length; i++) {
                 list.setFont(i, getListFont());
             }
+        }
     }
 
     /**
      * recievePM
      * asks user to display PM or not.
      */
-    public void recievePM(){
-
+    public void recievePM() {
     }
-    
+
     /**
      * Called to display PM.
      */
-    private void displayPM(String from, String msg){
+    public void displayPM(String from, String msg) {
+        System.out.println("GUI.displayPM " + from + msg);
+
         
+        Form rpm = getReadPM();
+        ((StringItem)rpm.get(0)).setText(from);
+        ((TextField)rpm.get(1)).setString(msg);
+        System.out.println(((TextField)rpm.get(1)).getString());
+        //((StringItem)readPM.get(0)).setText(from);
+        //((TextField)readPM.get(1)).setString(msg);
+        switchDisplayable(null, rpm);
+        //System.out.println("GUI gets: " + from + msg);
     }
+
 
     /**
      * Called when MIDlet is paused.

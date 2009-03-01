@@ -24,8 +24,8 @@ public class Client implements DiscoveryListener {
     private DiscoveryAgent discoveryAgent = null;
     private String connectionURL = null;
     private Vector device = new Vector();
-    private ServiceRecord[] records = null;
-    private boolean inquiryCompl = false;
+    private Vector records = new Vector();
+    //private ServiceRecord[] records = null;
     int count = 0;
     int maxSearches = 10;
     InputStream ip = null;
@@ -61,7 +61,7 @@ public class Client implements DiscoveryListener {
                 synchronized (this) {
                     this.wait();
                 }
-                System.out.println(records[i].getConnectionURL(ServiceRecord.NOAUTHENTICATE_NOENCRYPT, false));
+            //System.out.println(records[i].getConnectionURL(ServiceRecord.NOAUTHENTICATE_NOENCRYPT, false));
 
             }
         /**
@@ -92,8 +92,9 @@ public class Client implements DiscoveryListener {
         sr.getConnectionURL(ServiceRecord.NOAUTHENTICATE_NOENCRYPT, false);
         StreamConnection connection = getconnection();
         op = connection.openOutputStream();
-        op.write(msg.length());
-        op.write(msg.getBytes());
+        String message = new String(localDevice.getFriendlyName() + ":" + msg);
+        op.write(message.length());
+        op.write(message.getBytes());
         op.close();
         connection.close();
 
@@ -107,7 +108,8 @@ public class Client implements DiscoveryListener {
             rd = (RemoteDevice) device.elementAt(i);
             try {
                 if (to.equals(rd.getFriendlyName(false))) {
-                    sr = records[i];
+                    //sr = records[i];
+                    sr = (ServiceRecord) records.elementAt(i);
                 }
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -119,8 +121,10 @@ public class Client implements DiscoveryListener {
 
     public synchronized void deviceDiscovered(RemoteDevice btDevice, DeviceClass cod) {
         try {
-            System.out.println("New Device discovered : " + btDevice.getFriendlyName(false) + " (" + btDevice.getBluetoothAddress() + ")");
-            device.addElement(btDevice);
+            if (!device.contains(btDevice)) {
+                System.out.println("New Device discovered : " + btDevice.getFriendlyName(false) + " (" + btDevice.getBluetoothAddress() + ")");
+                device.addElement(btDevice);
+            }
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -130,9 +134,11 @@ public class Client implements DiscoveryListener {
     public synchronized void servicesDiscovered(int transID,
             ServiceRecord[] servRecords) {
 
-        records = new ServiceRecord[servRecords.length];
-        records = servRecords;
+        //records = new ServiceRecord[servRecords.length];
+        //records = servRecords;
+        records.removeAllElements();
         for (int i = 0; i < servRecords.length; i++) {
+            records.addElement(servRecords[i]);
             int[] atrids = servRecords[i].getAttributeIDs();
             String servName = (String) ((DataElement) servRecords[i].getAttributeValue(0x100)).getValue();
             System.out.println("Service Name : " + servName);
