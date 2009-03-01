@@ -6,6 +6,7 @@ package pusherblue.COMM;
 
 import java.io.IOException;
 import java.io.InputStream;
+import pusherblue.CORE.Core;
 
 /**
  *
@@ -14,9 +15,11 @@ import java.io.InputStream;
 public class ReadThread extends Thread {
 
     InputStream ip = null;
+    Core logic = null;
 
-    public ReadThread(InputStream ip) {
+    public ReadThread(InputStream ip, Core logic) {
         this.ip = ip;
+        this.logic = logic;
     }
 
     public void run() {
@@ -29,10 +32,13 @@ public class ReadThread extends Thread {
                 if (line.trim().equals("bye$$")) {
                     isRunning = false;
                 } else {
-                    //ecm.showMessage(clientName + ": " + line);
-                    System.out.println("Tog emot: " + line);
                     // show in the GUI
-                    String upper = line.trim().toUpperCase();
+                    int pos = line.indexOf(":");
+                    String from = line.substring(0,pos-1);
+                    String msg = line.substring(pos+1);
+                    logic.showPM(from, msg);
+                    //System.out.println(from + msg);
+                    //String upper = line.trim().toUpperCase();
                     //if (isRunning) {
                     //    sendMessage(upper);
                     //}

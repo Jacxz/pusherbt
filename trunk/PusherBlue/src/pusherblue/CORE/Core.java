@@ -37,15 +37,11 @@ public class Core {
         try {
             this.gui = gui;
             userList = new Vector();
-            svr = new Server();
+            svr = new Server(this);
             svr.start();
-            cl = new Client(); 
-            getUsers(); 
-            //listUsers();
+            cl = new Client();
             userList = getUsers();
             
-            //devices = cl.findDevices();
-
         } catch (IOException ex) {
             ex.printStackTrace();
         } catch (InterruptedException ex) {
@@ -73,8 +69,10 @@ public class Core {
      */
     public void initChat() {
     }
-    public void showPM(String from, String msg){
-        //gui
+    public void showPM(String from,String msg){
+        System.out.println("logic.showPM " + from + msg);
+        gui.displayPM(from, msg);
+
     }
     public void sendPM(String to, String msg) {
         try {
@@ -92,6 +90,7 @@ public class Core {
     public Vector getUsers() {
         try {
             devices = cl.findDevices();
+            userList.removeAllElements();
             for (int i = 0; i < devices.size(); i++) {
                 RemoteDevice device;
                 device = (RemoteDevice) devices.elementAt(i);
@@ -118,7 +117,7 @@ public class Core {
      * @return Array of user names
      */
     public String[] listUsers() {
-        //getUsers();
+        getUsers();
         String names[] = new String[userList.size()];
         for (int i = 0; i < userList.size(); i++) {
             User user = (User) userList.elementAt(i);

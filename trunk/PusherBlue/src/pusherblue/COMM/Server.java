@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pusherblue.COMM;
 
 /**
@@ -16,6 +15,7 @@ import javax.bluetooth.UUID;
 import javax.microedition.io.Connector;
 import javax.microedition.io.StreamConnection;
 import javax.microedition.io.StreamConnectionNotifier;
+import pusherblue.CORE.Core;
 
 public class Server extends Thread {
 
@@ -24,10 +24,13 @@ public class Server extends Thread {
     InputStream ip = null;
     OutputStream op = null;
     UUID uuid = null;
+    Core logic;
 
-    public Server(){
+    public Server(Core logic) {
+        this.logic = logic;
     }
-     public void run(){
+
+    public void run() {
         try {
             //Extends a stream for client to connect
             uuid = new UUID(0x1101);
@@ -46,10 +49,11 @@ public class Server extends Thread {
             //Starts a new thread for reading data from inputstream
             //while the present thread, goes forward and write data to outputstream
             //thus enabling a two way communication with the client
-            ReadThread rdthr = new ReadThread(ip);
+            ReadThread rdthr = new ReadThread(ip, logic);
             rdthr.start();
+        //con.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-     }
+    }
 }
