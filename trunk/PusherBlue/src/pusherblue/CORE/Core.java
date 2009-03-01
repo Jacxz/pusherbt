@@ -7,8 +7,6 @@ package pusherblue.CORE;
 import java.io.IOException;
 import java.util.Vector;
 import javax.bluetooth.RemoteDevice;
-import javax.bluetooth.ServiceRecord;
-import javax.microedition.lcdui.Item;
 import pusherblue.COMM.Client;
 import pusherblue.COMM.Server;
 import pusherblue.DATA.Data;
@@ -24,8 +22,7 @@ public class Core {
     private Data data;
     private Server svr;
     private Client cl;
-    private Vector userList;
-    private User mySelf;
+    private Vector userList = new Vector();
     private GUI gui;
     private Vector devices = null;
 
@@ -36,7 +33,6 @@ public class Core {
     public Core(GUI gui) {
         try {
             this.gui = gui;
-            userList = new Vector();
             svr = new Server(this);
             svr.start();
             cl = new Client();
@@ -54,7 +50,7 @@ public class Core {
      * @param data
      * @return
      */
-
+    
     public Data processData(Data data) {
         this.data = data;
 
@@ -69,14 +65,12 @@ public class Core {
      */
     public void initChat() {
     }
-    public void showPM(String from,String msg){
-        System.out.println("logic.showPM " + from + msg);
-        gui.displayPM(from, msg);
 
+    public void showPM(String from,String msg){
+        gui.displayPM(from, msg);
     }
     public void sendPM(String to, String msg) {
         try {
-            System.out.println(msg);
             cl.writeData(to, msg);
         } catch (IOException ex) {
             ex.printStackTrace();

@@ -261,7 +261,7 @@ public class GUI extends MIDlet implements CommandListener {
             list.setSelectCommand(null);
             list.setSelectedFlags(new boolean[] {  });//GEN-END:|29-getter|1|29-postInit
             // write post-init user code here
-            String users[] = {"  Remote devicelist..."};
+            String users[] = {};
             listUsers(users);
         //listUsers(logic.listUsers());
         }//GEN-BEGIN:|29-getter|2|
@@ -653,7 +653,7 @@ public class GUI extends MIDlet implements CommandListener {
      * populates the list screen with users
      */
     private void listUsers(String[] users) {
-
+        logic.listUsers();
         if (users.length > 0) {
             list.deleteAll();
             for (int i = 0; i < users.length; i++) {

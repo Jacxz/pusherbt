@@ -6,6 +6,7 @@ package pusherblue.COMM;
 
 import java.io.IOException;
 import java.io.InputStream;
+import javax.microedition.io.StreamConnection;
 import pusherblue.CORE.Core;
 
 /**
@@ -14,38 +15,47 @@ import pusherblue.CORE.Core;
  */
 public class ReadThread extends Thread {
 
-    InputStream ip = null;
-    Core logic = null;
+    private InputStream ip = null;
+    private Core logic = null;
+    private StreamConnection con;
 
-    public ReadThread(InputStream ip, Core logic) {
-        this.ip = ip;
+    public ReadThread(StreamConnection con, Core logic) {
+        this.con = con;
         this.logic = logic;
     }
 
     public void run() {
-        boolean isRunning = true;
-        String line;
-        while (isRunning) {
-            if ((line = readData()) == null) {
-                isRunning = false;
-            } else { // there was some input
-                if (line.trim().equals("bye$$")) {
+        try {
+            boolean isRunning = true;
+            String line;
+            //Open streams for two way communication.
+            ip = con.openInputStream();
+            while (isRunning) {
+                if ((line = readData()) == null) {
                     isRunning = false;
                 } else {
-                    // show in the GUI
-                    int pos = line.indexOf(":");
-                    String from = line.substring(0,pos-1);
-                    String msg = line.substring(pos+1);
-                    logic.showPM(from, msg);
-                    //System.out.println(from + msg);
-                    //String upper = line.trim().toUpperCase();
-                    //if (isRunning) {
-                    //    sendMessage(upper);
-                    //}
+                    // there was some input
+                    if (line.trim().equals("bye$$")) {
+                        isRunning = false;
+                    } else {
+                        // show in the GUI
+                        int pos = line.indexOf(":");
+                        String from = line.substring(0, pos);
+                        String msg = line.substring(pos + 1);
+                        logic.showPM(from, msg);
+                        isRunning = false;
+                    }
                 }
             }
+            ip.close();
+            con.close();
+            System.out.println("Input closed..");
+            this.join();
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
-        System.out.println("Handler finished");
     }
 
     private String readData() {
