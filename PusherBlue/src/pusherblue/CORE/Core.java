@@ -68,6 +68,10 @@ public class Core {
         return cl.getLocalFriendlyName();
     }
 
+    public Vector getInBox() {
+        return inBox;
+    }
+
     /**
      * Creates the appropriate data object depending on the msgstrings and returns it
      *@param msgString String containing from+mess+to
