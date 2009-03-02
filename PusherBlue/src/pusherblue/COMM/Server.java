@@ -11,6 +11,9 @@ package pusherblue.COMM;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import javax.bluetooth.BluetoothStateException;
+import javax.bluetooth.DiscoveryAgent;
+import javax.bluetooth.LocalDevice;
 import javax.bluetooth.UUID;
 import javax.microedition.io.Connector;
 import javax.microedition.io.StreamConnection;
@@ -19,36 +22,35 @@ import pusherblue.CORE.Core;
 
 public class Server extends Thread {
 
-    StreamConnection con = null;
-    StreamConnectionNotifier service = null;
-    InputStream ip = null;
-    OutputStream op = null;
-    UUID uuid = null;
-    Core logic;
-
+    private StreamConnection con = null;
+    private StreamConnectionNotifier service = null;
+    private UUID uuid = null;
+    private Core logic;
+    
     public Server(Core logic) {
-        this.logic = logic;
+            this.logic = logic;
     }
 
     public void run() {
         try {
-
-            //Extends a stream for client to connect
             uuid = new UUID(0x1101);
             StringBuffer url = new StringBuffer("btspp://");
             url.append("localhost").append(':');
             url.append(uuid.toString());
             url.append(";name=ChatServer");
             url.append(";authorize=false");
+            int i = 0;
+
+            service = (StreamConnectionNotifier) Connector.open(url.toString());
             while (true) {
-                service = (StreamConnectionNotifier) Connector.open(url.toString());
                 //Server waiting for client to connect
-                System.out.println("Väntar på kontakt...");
+                System.out.println("Väntar på kontakt..." + i);
                 con = service.acceptAndOpen();
-                System.out.println("Kontakt skapad...");
+                System.out.println("Kontakt skapad..." + i);
                 //Starts a new thread for reading data from inputstream
                 ReadThread rdthr = new ReadThread(con, logic);
                 rdthr.start();
+                i++;
             }
         } catch (IOException ex) {
             ex.printStackTrace();

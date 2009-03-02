@@ -24,12 +24,6 @@ public class Client implements DiscoveryListener {
     private String connectionURL = null;
     private Vector device = new Vector();
     private Vector records = new Vector();
-    //private ServiceRecord[] records = null;
-    private int count = 0;
-    private int maxSearches = 10;
-    private InputStream ip = null;
-    private OutputStream op = null;
-    private boolean isSending = true;
 
     public Client() throws IOException, InterruptedException {
         localDevice = LocalDevice.getLocalDevice();
@@ -61,52 +55,24 @@ public class Client implements DiscoveryListener {
                 synchronized (this) {
                     this.wait();
                 }
-            //System.out.println(records[i].getConnectionURL(ServiceRecord.NOAUTHENTICATE_NOENCRYPT, false));
-
             }
-        /**
-        if (connectionURL != null) {
-        break;
-        } */
         }
-        /** // end of forloop
-        //If the URL of the device begins with btspp, ie,of an SPP server then
-        //we call the getConnection meethod which
-        //establishes a connection with the SPPServer and returns it. Connection
-        // returned is of type  StreamConnection.
-        //A piece of raw data is being sent over RFCOMM.
-
-        if (connectionURL == null) {
-        System.out.println("No service available...........");
-        } else if (connectionURL.startsWith("btspp")) {
-        StreamConnection connection = getconnection();
-        op = connection.openOutputStream();
-        ip = connection.openInputStream();
-        //tas bort
-        } */
         return device;
     }
 
     public void writeData(String to, String msg) throws IOException {
         if (msg.length() > 0) {
             ServiceRecord sr = getRemote(to);
-            sr.getConnectionURL(ServiceRecord.NOAUTHENTICATE_NOENCRYPT, false);
-            Thread wt = new WriteThread(connectionURL,
-                    localDevice.getFriendlyName(), msg);
+            Thread wt = new WriteThread(sr, localDevice.getFriendlyName(), msg);
             wt.start();
+            System.out.println(" * * * Data skriven * * * ");
         }
-    /**op = connection.openOutputStream();
-    String message = new String( + ":" + msg);
-    System.out.println("- - - Skickar: " + message);
-    op.write(message.length());
-    op.write(message.getBytes());
-    op.close(); */
     }
 
     private ServiceRecord getRemote(String to) {
         ServiceRecord sr = null;
 
-        RemoteDevice rd;
+        RemoteDevice rd = null;
         for (int i = 0; i < device.size(); i++) {
             rd = (RemoteDevice) device.elementAt(i);
             try {

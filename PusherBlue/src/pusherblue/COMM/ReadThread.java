@@ -34,22 +34,14 @@ public class ReadThread extends Thread {
                 if ((line = readData()) == null) {
                     isRunning = false;
                 } else {
-                    // there was some input
-                    if (line.trim().equals("bye$$")) {
-                        isRunning = false;
-                    } else {
-                        
-                        logic.processData(line);
-                        isRunning = false;
-                    }
+                    logic.processData(line);
+                    isRunning = false;
                 }
             }
             ip.close();
             con.close();
+            con = null;
             System.out.println("Input closed..");
-            this.join();
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
