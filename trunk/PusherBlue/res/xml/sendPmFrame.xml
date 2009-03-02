@@ -1,0 +1,23 @@
+<!--
+    Document   : sendPmFrame.xml
+    Created on : 01 March 2009, 16:15
+    Author     : Jacxz
+    Description:
+        Purpose of the document follows.
+-->
+<screen>
+    <container class="sendPM">
+        <textarea id="To">
+
+        </textarea>
+        <textfield id="Msg">
+
+        </textfield>
+    </container>
+    <screenFirstMenu onAction="Back">
+        Back
+    </screenFirstMenu>
+    <screenSecondMenu onAction="SendPM">
+        Send
+    </screenSecondMenu>
+</screen>

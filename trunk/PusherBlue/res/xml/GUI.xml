@@ -1,0 +1,43 @@
+<!--
+    Document   : GUI.xml
+    Created on : 28 February 2009, 16:41
+    Author     : Jacxz
+    Description:
+        Purpose of the document follows.
+-->
+<screen title="Pusher Blue">
+    <container>
+        <list id="UserList">
+            <_renderer>
+            <![CDATA[<listItem id="${userName}"><text>${userName}</text></listItem>]]>
+            </_renderer>
+            <_items>@{users}</_items>
+        </list>
+    </container>
+    <screenFirstMenu>
+        Menu
+        <menuPopup>
+			<menuItem onAction="Inbox">
+                Inbox
+            </menuItem>
+            <menuItem onAction="Chat">
+                Chat
+            </menuItem>
+            <menuItem onAction="File">
+                File
+            </menuItem>
+            <menuItem onAction="Options">
+                Options
+            </menuItem>
+            <menuItem onAction="Update">
+                Update Users
+            </menuItem>
+            <menuItem onAction="Exit">
+                Exit
+            </menuItem>
+        </menuPopup>
+    </screenFirstMenu>
+    <screenSecondMenu onAction="PM">
+        PM
+    </screenSecondMenu>
+</screen>

@@ -1,0 +1,84 @@
+/*
+    Document   : GUI
+    Created on : 28-Feb-2009, 16:41:46
+    Author     : Jacxz
+    Description:
+        Purpose of the stylesheet follows.
+*/
+screenTopbar text {
+    color: #085372;
+    padding: 1 2 1 2;
+}
+screenTopbar {
+    font-style: bold;
+    bg-color: #cccccc;
+    border: 0 0 1 0;
+    border-color: #185a76;
+}
+screenBottombar {
+    bg-color: #77787a;
+    border: 1 0 0 0;
+    border-color: #185a76;
+    padding: 2 2 1 2;
+}
+screenBottombar text {
+    color: #085372;
+}
+desktop {
+    bg-image: url(PusherBlue.png);
+}
+text {
+    align: center;
+    font-style: normal;
+}
+menuPopup {
+    bg-color: #bababa;
+    border: 2;
+    border-color: #185a76;
+    padding: 1;
+    margin: 0 0 5 0;
+}
+menuItem {
+    padding: 1 26 1 6;
+    margin: 1 0 0 0;
+    border: 1;
+    border-color: #185a76;
+    color: #085372;
+}
+menuItem:hover {
+    bg-color: #a7c9d7;
+    border-color: #0098d7;
+}
+list {
+    padding: 1;
+}
+listItem {
+    color: #085372;
+    border: 1;
+    padding: 0 25 0 25;
+    border-color: #185a76;
+    margin: 0 0 2 0;
+}
+listItem:hover {
+    bg-color: #a7c9d7;
+    border: 1;
+    border-color: #0098d7;
+}
+.sendPM {
+    gridlayout: 1 2;
+    bg-color: white;
+    margin: 20;
+}
+textField {
+    border: 1;
+    border-color: black;
+    min-size: 240 120;
+    margin: 2;
+}
+popupBox {
+    border: 1;
+    border-color: #0098d7;
+    bg-color: #a7c9d7;
+    padding: 5;
+    grayed-color: #444447;
+}
