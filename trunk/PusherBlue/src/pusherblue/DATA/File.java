@@ -5,10 +5,33 @@
 
 package pusherblue.DATA;
 
+import pusherblue.COMM.Client;
+import pusherblue.GUI.GUI;
+
 /**
  *
  * @author Niklas
  */
 public class File extends  Data {
+
+    public void send(GUI gui) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void sendCom(Client cl) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void sendGUI(GUI gui) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public String convertDataToString() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void convertStringToData(String msgString) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
 }

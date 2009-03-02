@@ -25,6 +25,9 @@ public class Core {
     private Vector userList = new Vector();
     private GUI gui;
     private Vector devices = null;
+    private Vector inBox;
+    private String name = null;
+    //private Vector outBox;
 
     /**
      * Constructor for Core
@@ -32,12 +35,15 @@ public class Core {
      */
     public Core(GUI gui) {
         try {
+
             this.gui = gui;
             svr = new Server(this);
             svr.start();
             cl = new Client();
+            //listUsers();
             userList = getUsers();
-            
+            getUsers();
+            inBox = new Vector();
         } catch (IOException ex) {
             ex.printStackTrace();
         } catch (InterruptedException ex) {
@@ -46,38 +52,50 @@ public class Core {
 
     }
     /*
-     * Processes current data
+     * Processes current data from comm
      * @param data
      * @return
-     */
-    
-    public Data processData(Data data) {
-        this.data = data;
-
-        if (data instanceof PM) {
-            //...
-        }
-        return data;
+     */    
+    public void processData(String msgString) {
+       
+        createData(msgString).sendGUI(gui);
     }
 
     /**
-     * Initializes the chat
+     * gui calls this method, depending on what kind of data different methods
+     * will be called
+     * @param data Data from GUI
      */
-    public void initChat() {
+    public void sendData(Data data) {       
+        data.sendCom(cl);
     }
 
-    public void showPM(String from,String msg){
-        gui.displayPM(from, msg);
+    public String getFriendlyName(){
+        return name;
     }
-    public void sendPM(String to, String msg) {
-        try {
-            cl.writeData(to, msg);
-        } catch (IOException ex) {
-            ex.printStackTrace();
+
+    public void setFriendlyName(String name){
+        this.name = name;
+    }
+
+    /**
+     * Creates the appropriate data object depending on the msgstrings and returns it
+     *
+     */
+    private Data createData(String msgString) {
+        String type = msgString.substring(0, msgString.indexOf("::"));        
+        msgString = msgString.substring(msgString.indexOf("::") + 2, msgString.length());
+        if (type.equals("PM")) {
+            PM pm = new PM(msgString);
+           // inBox.addElement(pm);            
+            return pm;
         }
+        System.out.println("Kunde inte matcha på någon typ av meddelande!");
+        return null;
+
     }
 
-        /**
+    /**
      * Gets a vector with remoteDevices from Client.
      * Retreives info from vector and stores it into User objects
      */
@@ -97,7 +115,7 @@ public class Core {
                 }
                 userList.addElement(user);
             }
-            
+
         } catch (IOException ex) {
             ex.printStackTrace();
         } catch (InterruptedException ex) {

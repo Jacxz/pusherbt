@@ -38,11 +38,8 @@ public class ReadThread extends Thread {
                     if (line.trim().equals("bye$$")) {
                         isRunning = false;
                     } else {
-                        // show in the GUI
-                        int pos = line.indexOf(":");
-                        String from = line.substring(0, pos);
-                        String msg = line.substring(pos + 1);
-                        logic.showPM(from, msg);
+                        
+                        logic.processData(line);
                         isRunning = false;
                     }
                 }

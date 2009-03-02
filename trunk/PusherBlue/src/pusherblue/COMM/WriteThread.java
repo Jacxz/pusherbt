@@ -30,7 +30,7 @@ public class WriteThread extends Thread {
         try {
             StreamConnection connection = (StreamConnection) Connector.open(connectionURL);
             op = connection.openOutputStream();
-            String message = new String(from + ":" + msg);
+            String message = new String(msg);
             System.out.println("- - - Skickar: " + message);
             op.write(message.length());
             op.write(message.getBytes());
