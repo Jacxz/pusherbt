@@ -63,8 +63,10 @@ public class UserListFrame implements Frame {
             return false;
         }
         if ("ReadPM".equals(identifier)) {
-            System.out.println("UserListFrame.ReadPM To: " + (String)arguments[0] + " From: " + (String)arguments[1]);
-            Kuix.getFrameHandler().pushFrame(new ReceivePmFrame((String)arguments[0], (String)arguments[1], logic));
+            System.out.println("UserListFrame.ReadPM To: " + (String)arguments[0] +
+                                " From: " + (String)arguments[1]);
+            Kuix.getFrameHandler().pushFrame(new ReceivePmFrame((String)arguments[0],
+                                            (String)arguments[1], logic));
             return false;
         }
         return true;
