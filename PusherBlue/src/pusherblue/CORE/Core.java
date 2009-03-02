@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package pusherblue.CORE;
 
 import java.io.IOException;
@@ -19,15 +15,12 @@ import pusherblue.GUI.GUI;
  */
 public class Core {
 
-    private Data data;
     private Server svr;
     private Client cl;
     private Vector userList = new Vector();
     private GUI gui;
     private Vector devices = null;
     private Vector inBox;
-    private String name = null;
-    //private Vector outBox;
 
     /**
      * Constructor for Core
@@ -35,12 +28,10 @@ public class Core {
      */
     public Core(GUI gui) {
         try {
-
             this.gui = gui;
             svr = new Server(this);
             svr.start();
             cl = new Client();
-            name = cl.getLocalFriendlyName();
             userList = getUsers();
             getUsers();
             inBox = new Vector();
@@ -53,11 +44,10 @@ public class Core {
     }
     /*
      * Processes current data from comm
-     * @param data
-     * @return
-     */    
+     * @param msgString String from comm containing from+mess+to
+     * 
+     */
     public void processData(String msgString) {
-       
         createData(msgString).sendGUI(gui);
     }
 
@@ -66,36 +56,40 @@ public class Core {
      * will be called
      * @param data Data from GUI
      */
-    public void sendData(Data data) {       
+    public void sendData(Data data) {
         data.sendCom(cl);
     }
 
-    public String getFriendlyName(){
-       return name;
+    /**
+     * Called by GUI to get local name
+     * @return String name
+     */
+    public String getFriendlyName() {
+        return cl.getLocalFriendlyName();
     }
 
-     /**
+    /**
      * Creates the appropriate data object depending on the msgstrings and returns it
-     *
+     *@param msgString String containing from+mess+to
+     *@return Data object to be handled by GUI
      */
     private Data createData(String msgString) {
-        String type = msgString.substring(0, msgString.indexOf("::"));        
+        String type = msgString.substring(0, msgString.indexOf("::"));
         msgString = msgString.substring(msgString.indexOf("::") + 2, msgString.length());
         if (type.equals("PM")) {
             PM pm = new PM(msgString);
-           // inBox.addElement(pm);            
+            inBox.addElement(pm);
             return pm;
         }
         System.out.println("Kunde inte matcha på någon typ av meddelande!");
         return null;
-
     }
 
     /**
      * Gets a vector with remoteDevices from Client.
      * Retreives info from vector and stores it into User objects
      */
-    public Vector getUsers() {
+    private Vector getUsers() {
         try {
             devices = cl.findDevices();
             userList.removeAllElements();
@@ -111,6 +105,7 @@ public class Core {
                 }
                 userList.addElement(user);
             }
+
         } catch (IOException ex) {
             ex.printStackTrace();
         } catch (InterruptedException ex) {
