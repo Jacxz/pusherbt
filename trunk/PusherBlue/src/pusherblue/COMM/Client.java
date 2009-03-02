@@ -194,4 +194,9 @@ public class Client implements DiscoveryListener {
     //public ServiceRecord[] getRecords() {
     //    return records;
     //}
+
+    public String getLocalFriendlyName(){
+        return localDevice.getFriendlyName();
+    }
+
 }
