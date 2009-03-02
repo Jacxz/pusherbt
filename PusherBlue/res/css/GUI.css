@@ -64,7 +64,7 @@ listItem:hover {
     border: 1;
     border-color: #0098d7;
 }
-.sendPM {
+.containerPM {
     gridlayout: 1 2;
     bg-color: white;
     margin: 20;
