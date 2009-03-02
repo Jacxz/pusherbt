@@ -28,7 +28,7 @@ public class Server extends Thread {
 
     public void run() {
         try {
-            uuid = new UUID(0x1101);
+            uuid = new UUID(0xB984FE2A); //1101
             StringBuffer url = new StringBuffer("btspp://");
             url.append("localhost").append(':');
             url.append(uuid.toString());
