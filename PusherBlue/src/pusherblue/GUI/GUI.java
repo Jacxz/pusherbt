@@ -9,6 +9,7 @@ import javax.microedition.lcdui.*;
 import org.netbeans.microedition.lcdui.SplashScreen;
 import org.netbeans.microedition.lcdui.pda.FileBrowser;
 import pusherblue.CORE.Core;
+import pusherblue.DATA.PM;
 
 /**
  * @author Niklas
@@ -52,7 +53,7 @@ public class GUI extends MIDlet implements CommandListener {
     public GUI() {
         logic = new Core(this);
     }
-
+   
     //<editor-fold defaultstate="collapsed" desc=" Generated Methods ">//GEN-BEGIN:|methods|0|
     //</editor-fold>//GEN-END:|methods|0|
 
@@ -176,11 +177,11 @@ public class GUI extends MIDlet implements CommandListener {
             // write post-action user code here
             } else if (command == sendPmCommand) {//GEN-LINE:|7-commandAction|25|74-preAction
                 // write pre-action user code here
-                logic.sendPM(((StringItem) sendPM.get(0)).getText(),
-                        ((TextField) sendPM.get(1)).getString());
-                switchDisplayable(null, getList());
+                logic.sendData(new PM(logic.getFriendlyName(), ((StringItem) sendPM.get(0)).getText(),
+                        ((TextField) sendPM.get(1)).getString()));
 //GEN-LINE:|7-commandAction|26|74-postAction
-            // write post-action user code here
+                // write post-action user code here
+                switchDisplayable(null, getList());
             }//GEN-BEGIN:|7-commandAction|27|24-preAction
         } else if (displayable == splashScreen) {
             if (command == SplashScreen.DISMISS_COMMAND) {//GEN-END:|7-commandAction|27|24-preAction
@@ -580,7 +581,7 @@ public class GUI extends MIDlet implements CommandListener {
             readPM.addCommand(getCancelCommand());
             readPM.setCommandListener(this);//GEN-END:|101-getter|1|101-postInit
 
-            // write post-init user code here
+        // write post-init user code here
         }//GEN-BEGIN:|101-getter|2|
         return readPM;
     }
@@ -596,7 +597,7 @@ public class GUI extends MIDlet implements CommandListener {
             // write pre-init user code here
             pmFrom = new StringItem("From:", null);//GEN-LINE:|104-getter|1|104-postInit
 
-            // write post-init user code here
+        // write post-init user code here
         }//GEN-BEGIN:|104-getter|2|
         return pmFrom;
     }
@@ -675,20 +676,21 @@ public class GUI extends MIDlet implements CommandListener {
     /**
      * Called to display PM.
      */
-    public void displayPM(String from, String msg) {
+    public void displayPM(PM pm) {
+        String from = pm.getFrom();
+        String msg = pm.getMsg();
         System.out.println("GUI.displayPM " + from + msg);
 
-        
+
         Form rpm = getReadPM();
-        ((StringItem)rpm.get(0)).setText(from);
-        ((TextField)rpm.get(1)).setString(msg);
-        System.out.println(((TextField)rpm.get(1)).getString());
+        ((StringItem) rpm.get(0)).setText(from);
+        ((TextField) rpm.get(1)).setString(msg);
+        System.out.println(((TextField) rpm.get(1)).getString());
         //((StringItem)readPM.get(0)).setText(from);
         //((TextField)readPM.get(1)).setString(msg);
         switchDisplayable(null, rpm);
-        //System.out.println("GUI gets: " + from + msg);
+    //System.out.println("GUI gets: " + from + msg);
     }
-
 
     /**
      * Called when MIDlet is paused.
