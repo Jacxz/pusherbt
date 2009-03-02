@@ -6,7 +6,7 @@
         Purpose of the document follows.
 -->
 <screen>
-    <container class="sendPM">
+    <container class="containerPM">
         <textarea id="To">
 
         </textarea>

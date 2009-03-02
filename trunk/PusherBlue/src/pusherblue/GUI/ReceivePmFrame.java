@@ -36,7 +36,7 @@ public class ReceivePmFrame implements Frame{
         }
         if ("Reply".equals(identifier)) {
             System.out.println(((TextArea)screen.getWidget("From")).getText() + ((TextArea)screen.getWidget("Msg")).getText());
-            Kuix.getFrameHandler().pushFrame(new SendPmFrame(((TextArea)screen.getWidget("From")).getText(), null));
+            Kuix.getFrameHandler().pushFrame(new SendPmFrame(((TextArea)screen.getWidget("From")).getText(), logic));
             return false;
         }
         return true;

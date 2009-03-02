@@ -27,6 +27,7 @@ public class Client implements DiscoveryListener {
 
     public Client() throws IOException, InterruptedException {
         localDevice = LocalDevice.getLocalDevice();
+        localDevice.setDiscoverable(DiscoveryAgent.GIAC);
         discoveryAgent = localDevice.getDiscoveryAgent();
     }
 
