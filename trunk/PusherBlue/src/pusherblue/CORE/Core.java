@@ -111,7 +111,6 @@ public class Core {
                 }
                 userList.addElement(user);
             }
-
         } catch (IOException ex) {
             ex.printStackTrace();
         } catch (InterruptedException ex) {
