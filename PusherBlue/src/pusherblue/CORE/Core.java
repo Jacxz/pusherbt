@@ -40,7 +40,7 @@ public class Core {
             svr = new Server(this);
             svr.start();
             cl = new Client();
-            //listUsers();
+            name = cl.getLocalFriendlyName();
             userList = getUsers();
             getUsers();
             inBox = new Vector();
@@ -71,14 +71,10 @@ public class Core {
     }
 
     public String getFriendlyName(){
-        return name;
+       return name;
     }
 
-    public void setFriendlyName(String name){
-        this.name = name;
-    }
-
-    /**
+     /**
      * Creates the appropriate data object depending on the msgstrings and returns it
      *
      */
