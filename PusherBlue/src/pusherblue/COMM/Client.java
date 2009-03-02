@@ -34,7 +34,7 @@ public class Client implements DiscoveryListener {
     public Vector findDevices() throws IOException, InterruptedException {
 // Starts inquiry for devices in the proximity and waits till the
 //inquiry is completed.
-        System.out.println("\nSearching for Devices...\n");
+        //System.out.println("\nSearching for Devices...\n");
         discoveryAgent.startInquiry(DiscoveryAgent.GIAC, this);
         synchronized (this) {
             this.wait();
@@ -66,7 +66,6 @@ public class Client implements DiscoveryListener {
             ServiceRecord sr = getRemote(to);
             Thread wt = new WriteThread(sr, localDevice.getFriendlyName(), msg);
             wt.start();
-            System.out.println(" * * * Data skriven * * * ");
         }
     }
 
@@ -90,13 +89,9 @@ public class Client implements DiscoveryListener {
 //When a device is discovered it is added to the remote device table.
 
     public synchronized void deviceDiscovered(RemoteDevice btDevice, DeviceClass cod) {
-        try {
-            if (!device.contains(btDevice)) {
-                System.out.println("New Device discovered : " + btDevice.getFriendlyName(false) + " (" + btDevice.getBluetoothAddress() + ")");
-                device.addElement(btDevice);
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        if (!device.contains(btDevice)) {
+            //System.out.println("New Device discovered : " + btDevice.getFriendlyName(false) + " (" + btDevice.getBluetoothAddress() + ")");
+            device.addElement(btDevice);
         }
     }
 
@@ -111,9 +106,9 @@ public class Client implements DiscoveryListener {
             records.addElement(servRecords[i]);
             int[] atrids = servRecords[i].getAttributeIDs();
             String servName = (String) ((DataElement) servRecords[i].getAttributeValue(0x100)).getValue();
-            System.out.println("Service Name : " + servName);
+            //System.out.println("Service Name : " + servName);
             connectionURL = servRecords[i].getConnectionURL(ServiceRecord.NOAUTHENTICATE_NOENCRYPT, true);
-            System.out.println("Connection url :" + connectionURL);
+            //System.out.println("Connection url :" + connectionURL);
             if (connectionURL != null) {
                 synchronized (this) {
                     this.notify();
@@ -127,22 +122,22 @@ public class Client implements DiscoveryListener {
     public synchronized void serviceSearchCompleted(int transID, int respCode) {
 
         if (respCode == SERVICE_SEARCH_ERROR) {
-            System.out.println("\nSERVICE_SEARCH_ERROR\n");
+            //System.out.println("\nSERVICE_SEARCH_ERROR\n");
         }
         if (respCode == SERVICE_SEARCH_COMPLETED) {
-            System.out.println("\nSERVICE_SEARCH_COMPLETED\n");
+            //System.out.println("\nSERVICE_SEARCH_COMPLETED\n");
         }
         if (respCode == SERVICE_SEARCH_TERMINATED) {
-            System.out.println("\n SERVICE_SEARCH_TERMINATED\n");
+            //System.out.println("\n SERVICE_SEARCH_TERMINATED\n");
         }
         if (respCode == SERVICE_SEARCH_NO_RECORDS) {
             synchronized (this) {
                 this.notify();
             }
-            System.out.println("\n SERVICE_SEARCH_NO_RECORDS\n");
+            //System.out.println("\n SERVICE_SEARCH_NO_RECORDS\n");
         }
         if (respCode == SERVICE_SEARCH_DEVICE_NOT_REACHABLE) {
-            System.out.println("\n SERVICE_SEARCH_DEVICE_NOT_REACHABLE\n");
+            //System.out.println("\n SERVICE_SEARCH_DEVICE_NOT_REACHABLE\n");
         }
     }
 //Once the device inquiry is completed it notifies the Thread that waits in the Main.
@@ -161,9 +156,7 @@ public class Client implements DiscoveryListener {
     //public ServiceRecord[] getRecords() {
     //    return records;
     //}
-
-    public String getLocalFriendlyName(){
+    public String getLocalFriendlyName() {
         return localDevice.getFriendlyName();
     }
-
 }

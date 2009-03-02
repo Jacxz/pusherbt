@@ -9,11 +9,6 @@ package pusherblue.COMM;
  * @author Niklas
  */
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import javax.bluetooth.BluetoothStateException;
-import javax.bluetooth.DiscoveryAgent;
-import javax.bluetooth.LocalDevice;
 import javax.bluetooth.UUID;
 import javax.microedition.io.Connector;
 import javax.microedition.io.StreamConnection;
@@ -44,9 +39,7 @@ public class Server extends Thread {
             service = (StreamConnectionNotifier) Connector.open(url.toString());
             while (true) {
                 //Server waiting for client to connect
-                System.out.println("Väntar på kontakt..." + i);
                 con = service.acceptAndOpen();
-                System.out.println("Kontakt skapad..." + i);
                 //Starts a new thread for reading data from inputstream
                 ReadThread rdthr = new ReadThread(con, logic);
                 rdthr.start();
