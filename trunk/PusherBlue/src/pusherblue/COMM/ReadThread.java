@@ -41,7 +41,6 @@ public class ReadThread extends Thread {
             ip.close();
             con.close();
             con = null;
-            System.out.println("Input closed..");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -52,7 +51,7 @@ public class ReadThread extends Thread {
         try {
             int len = ip.read(); // get the message length
             if (len <= 0) {
-                System.out.println("Message Length Error");
+                //System.out.println("Message Length Error");
                 return null;
             }
             data = new byte[len];
@@ -61,13 +60,13 @@ public class ReadThread extends Thread {
             while (len != data.length) {
                 int ch = ip.read(data, len, data.length - len);
                 if (ch == -1) {
-                    System.out.println("Message Read Error");
+                    //System.out.println("Message Read Error");
                     return null;
                 }
                 len += ch;
             }
         } catch (IOException e) {
-            System.out.println("readData(): " + e);
+            //System.out.println("readData(): " + e);
             return null;
         }
         return new String(data); // convert byte[] to String

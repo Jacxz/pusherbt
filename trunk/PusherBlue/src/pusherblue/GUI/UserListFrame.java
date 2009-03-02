@@ -75,10 +75,10 @@ public class UserListFrame implements Frame {
         screen.setCurrent();
         ((List)screen.getWidget("UserList")).removeAllItems();
         ((List)screen.getWidget("UserList")).cleanUpChildren();
-        userProvider.removeAllItems("users");
-        String[] users = logic.listUsers();
-        for (int i = 0 ; i < users.length ; i++)
-            userProvider.addItem("users", new UserDataProvider(users[i]));
+//        userProvider.removeAllItems("users");
+//        String[] users = logic.listUsers();
+//        for (int i = 0 ; i < users.length ; i++)
+//            userProvider.addItem("users", new UserDataProvider(users[i]));
     }
 
     public void onRemoved() {

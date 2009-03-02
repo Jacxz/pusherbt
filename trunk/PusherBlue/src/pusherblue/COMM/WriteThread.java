@@ -34,20 +34,16 @@ public class WriteThread extends Thread {
         StreamConnection connection = null;
         try {
             URL = sr.getConnectionURL(ServiceRecord.NOAUTHENTICATE_NOENCRYPT, false);
-            System.out.println(URL);
             connection = (StreamConnection) Connector.open(URL, Connector.WRITE, true);
-            System.out.println("2");
             op = connection.openOutputStream();
             String message = new String(msg);
             op.write(message.length());
             op.write(message.getBytes());
-            System.out.println("- - - Skickar: " + message);
             op.flush();
             op.close();
             connection.close();
         } catch (IOException ex) {
             ex.printStackTrace();
-            System.out.println("Fel i medd. sändning...");
         }
     }
 }

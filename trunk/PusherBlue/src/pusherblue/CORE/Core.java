@@ -32,8 +32,8 @@ public class Core {
             svr = new Server(this);
             svr.start();
             cl = new Client();
-            userList = getUsers();
-            getUsers();
+            //userList = getUsers();
+            //getUsers();
             inBox = new Vector();
         } catch (IOException ex) {
             ex.printStackTrace();
