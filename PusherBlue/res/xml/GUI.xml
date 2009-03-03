@@ -30,7 +30,7 @@
                 Options
             </menuItem>
             <menuItem onAction="Update">
-                Update Users
+                Find users
             </menuItem>
             <menuItem onAction="Exit">
                 Exit
