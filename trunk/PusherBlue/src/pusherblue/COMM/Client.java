@@ -47,7 +47,7 @@ public class Client implements DiscoveryListener {
 //it continues search in the next device detected.
         int[] attrSet = {0, 3, 4, 0x100};
         UUID[] uuids = new UUID[1];
-        uuids[0] = new UUID(0xB984FE2A); //1101
+        uuids[0] = new UUID(0xB984FE2); //1101
         for (int i = 0; i < device.size(); i++) {
             RemoteDevice rd = (RemoteDevice) device.elementAt(i);
             int transactionid = discoveryAgent.searchServices(attrSet, uuids, rd, this);
