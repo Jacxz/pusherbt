@@ -7,6 +7,7 @@ package pusherblue.GUI;
 
 import org.kalmeo.kuix.core.Kuix;
 import org.kalmeo.kuix.widget.Screen;
+import org.kalmeo.kuix.widget.Text;
 import org.kalmeo.kuix.widget.TextArea;
 import org.kalmeo.util.frame.Frame;
 import pusherblue.CORE.Core;
@@ -35,8 +36,8 @@ public class ReceivePmFrame implements Frame{
             return false;
         }
         if ("Reply".equals(identifier)) {
-            System.out.println(((TextArea)screen.getWidget("From")).getText() + ((TextArea)screen.getWidget("Msg")).getText());
-            Kuix.getFrameHandler().pushFrame(new SendPmFrame(((TextArea)screen.getWidget("From")).getText(), logic));
+            System.out.println(((Text)screen.getWidget("From")).getText() + ((TextArea)screen.getWidget("Msg")).getText());
+            Kuix.getFrameHandler().pushFrame(new SendPmFrame(((Text)screen.getWidget("From")).getText(), logic));
             return false;
         }
         return true;
@@ -44,7 +45,7 @@ public class ReceivePmFrame implements Frame{
 
     public void onAdded() {
         screen = Kuix.loadScreen("receivePmFrame.xml", null);
-        ((TextArea) screen.getWidget("From")).setText(from);
+        ((Text) screen.getWidget("From")).setText(from);
         ((TextArea) screen.getWidget("Msg")).setText(msg);
         screen.setCurrent();
     }

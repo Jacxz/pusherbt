@@ -93,7 +93,7 @@ public class Core {
      * Gets a vector with remoteDevices from Client.
      * Retreives info from vector and stores it into User objects
      */
-    private Vector getUsers() {
+    private void getUsers() {
         try {
             devices = cl.findDevices();
             userList.removeAllElements();
@@ -115,7 +115,6 @@ public class Core {
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
-        return userList;
     }
 
     /**
