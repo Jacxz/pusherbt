@@ -65,14 +65,23 @@ listItem:hover {
     border-color: #0098d7;
 }
 .containerPM {
-    gridlayout: 1 2;
-    bg-color: white;
+    layout: gridlayout(1,2);
     margin: 20;
 }
-textField {
+text.PM {
+    font-size: large;
+    color: white;
+}
+textArea.Msg {
+    bg-color: white;
     border: 1;
     border-color: black;
-    min-size: 240 120;
+    margin: 2;
+}
+textField.Msg {
+    bg-color: white;
+    border: 1;
+    border-color: black;
     margin: 2;
 }
 popupBox {
@@ -81,4 +90,23 @@ popupBox {
     bg-color: #a7c9d7;
     padding: 5;
     grayed-color: #444447;
+}
+popupbox.progress {
+	border: 2;
+	border-color: black;
+	padding: 0;
+	bg-color: #2d3030;
+	layout-data: sld(center, .9, -1);
+    grayed-color: #444447;
+}
+gauge {
+	border: 5 10 5 10;
+	border-color: #185a76;
+	bg-color: #002020;
+	padding: -5 -10 -5 -10;
+}
+gaugebar {
+	border: 5 10 5 10;
+	bg-color: #e95711;
+	border-color: #0098d7;
 }

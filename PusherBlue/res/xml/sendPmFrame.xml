@@ -7,10 +7,10 @@
 -->
 <screen>
     <container class="containerPM">
-        <textarea id="To">
+        <text id="To" class="PM">
 
-        </textarea>
-        <textfield id="Msg">
+        </text>
+        <textfield id="Msg" class="Msg" focused="true">
 
         </textfield>
     </container>

@@ -7,6 +7,7 @@ package pusherblue.GUI;
 
 import org.kalmeo.kuix.core.Kuix;
 import org.kalmeo.kuix.widget.Screen;
+import org.kalmeo.kuix.widget.Text;
 import org.kalmeo.kuix.widget.TextArea;
 import org.kalmeo.kuix.widget.TextField;
 import org.kalmeo.util.frame.Frame;
@@ -36,8 +37,8 @@ public class SendPmFrame implements Frame{
             return false;
         }
         if ("SendPM".equals(identifier)) {
-            System.out.println("To: " + ((TextArea)screen.getWidget("To")).getText().substring(4) + " Msg: " + ((TextField)screen.getWidget("Msg")).getText());
-            logic.sendData(new PM(logic.getFriendlyName(), ((TextArea)screen.getWidget("To")).getText().substring(4), ((TextField)screen.getWidget("Msg")).getText()));
+            System.out.println("To: " + ((Text)screen.getWidget("To")).getText().substring(4) + " Msg: " + ((TextField)screen.getWidget("Msg")).getText());
+            logic.sendData(new PM(logic.getFriendlyName(), ((Text)screen.getWidget("To")).getText().substring(4), ((TextField)screen.getWidget("Msg")).getText()));
             Kuix.getFrameHandler().removeFrame(this);
 			Kuix.getFrameHandler().getTopFrame().onAdded();
             return false;
@@ -47,7 +48,7 @@ public class SendPmFrame implements Frame{
 
     public void onAdded() {        
         screen = Kuix.loadScreen("sendPmFrame.xml", null);
-        ((TextArea) screen.getWidget("To")).setText("To: " + to);
+        ((Text) screen.getWidget("To")).setText("To: " + to);
         screen.setCurrent();
     }
 
