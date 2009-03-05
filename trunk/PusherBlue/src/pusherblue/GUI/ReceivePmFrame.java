@@ -45,7 +45,7 @@ public class ReceivePmFrame implements Frame{
 
     public void onAdded() {
         screen = Kuix.loadScreen("receivePmFrame.xml", null);
-        ((Text) screen.getWidget("From")).setText(from);
+        ((Text) screen.getWidget("From")).setText("From: " + from);
         ((TextArea) screen.getWidget("Msg")).setText(msg);
         screen.setCurrent();
     }
