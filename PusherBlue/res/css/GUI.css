@@ -53,6 +53,7 @@ list {
     padding: 1;
 }
 listItem {
+    align: center;
     color: #085372;
     border: 1;
     padding: 0 25 0 25;
