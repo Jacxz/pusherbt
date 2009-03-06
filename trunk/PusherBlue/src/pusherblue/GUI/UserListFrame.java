@@ -2,6 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package pusherblue.GUI;
 
 import org.kalmeo.kuix.core.Kuix;
@@ -11,7 +12,6 @@ import org.kalmeo.kuix.widget.List;
 import org.kalmeo.kuix.widget.PopupBox;
 import org.kalmeo.kuix.widget.Screen;
 import org.kalmeo.kuix.widget.Widget;
-import org.kalmeo.util.MathFP;
 import org.kalmeo.util.frame.Frame;
 import org.kalmeo.util.worker.Worker;
 import pusherblue.CORE.Core;
@@ -65,7 +65,6 @@ public class UserListFrame implements Frame {
 					while (!done) {
 						gauge.setValue(progress);
 						progress += PROGRESS_INCREMENT;
-                        System.out.println("Nummer: " + MathFP.div(progress, MAX_PROGRESS));
 						if (progress == MAX_PROGRESS || progress == 0) {
 							PROGRESS_INCREMENT *= -1;
 						}
@@ -87,7 +86,7 @@ public class UserListFrame implements Frame {
                 users = logic.listUsers();
                 done = true;
                 for (int i = 0 ; i < users.length ; i++)
-                userProvider.addItem("users", new UserDataProvider(users[i]));
+                    userProvider.addItem("users", new UserDataProvider(users[i]));
                 }
             }.start();
         }
@@ -105,8 +104,8 @@ public class UserListFrame implements Frame {
             return false;
         }
         if ("ReadPM".equals(identifier)) {
-            System.out.println("UserListFrame.ReadPM To: " + (String)arguments[0] +
-                                " Msg: " + (String)arguments[1]);
+            /*System.out.println("UserListFrame.ReadPM To: " + (String)arguments[0] +
+                                " Msg: " + (String)arguments[1]);*/
             Kuix.getFrameHandler().pushFrame(new ReceivePmFrame((String)arguments[0],
                                             (String)arguments[1], logic));
             return false;
