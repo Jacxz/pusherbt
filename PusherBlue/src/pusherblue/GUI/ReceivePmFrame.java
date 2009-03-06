@@ -36,8 +36,10 @@ public class ReceivePmFrame implements Frame{
             return false;
         }
         if ("Reply".equals(identifier)) {
-            System.out.println(((Text)screen.getWidget("From")).getText().substring(6) + ((TextArea)screen.getWidget("Msg")).getText());
-            Kuix.getFrameHandler().pushFrame(new SendPmFrame(((Text)screen.getWidget("From")).getText().substring(6), logic));
+            //System.out.println(((Text)screen.getWidget("From")).getText().substring(6) + ((TextArea)screen.getWidget("Msg")).getText());
+            Kuix.getFrameHandler().pushFrame(
+                    new SendPmFrame(((Text)screen.getWidget("From")).getText().substring(6),
+                    logic));
             Kuix.getFrameHandler().removeFrame(this);
             return false;
         }
