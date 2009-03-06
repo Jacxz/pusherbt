@@ -41,7 +41,7 @@ public class PM extends Data {
     }
 
     public String convertDataToString() {
-        return ("PM::" + getFrom() + ":@" + getMsg() + ":@" + getTo());
+        return ("PM::" + getFrom() + ":@" + getTo() + ":@" + getMsg());
     }
 
     /**
@@ -81,7 +81,7 @@ public class PM extends Data {
 
         //set the data values
         from = msgAr[0];
-        msg = msgAr[1];
-        to = msgAr[2];
+        to = msgAr[1];
+        msg = msgAr[2];
     }
 }
