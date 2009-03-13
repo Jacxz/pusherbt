@@ -78,9 +78,8 @@ public class Client implements DiscoveryListener {
             try {
                 if (to.equals(rd.getFriendlyName(false))) {
                     //sr = records[i];
-                    //borde plocka ut rätt service här, utgår från att det
-                    //bara finns en service just nu... :/
-                    sr = (ServiceRecord) records.elementAt(0);
+                    //i > 0 fails!?
+                    sr = (ServiceRecord) records.elementAt(i);
                 }
             } catch (IOException ex) {
                 ex.printStackTrace();
